@@ -1,4 +1,4 @@
-## Version 2.3.7.0 PRE-RELEASE NOTE
+## Version 2.3.8.0 PRE-RELEASE NOTE
 - **MSI Release**
   - This version allows you to try the update VIA MSI after installation by MSI it also brings the launch of the application after installation
 
