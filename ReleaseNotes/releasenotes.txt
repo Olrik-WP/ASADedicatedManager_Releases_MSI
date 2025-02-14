@@ -1,3 +1,7 @@
+## Version 2.4.1.0 FINAL-RELEASE NOTE
+- **New Features**
+  - Added Astraeos_WP map from new Astraeos DLC
+
 ## Version 2.4.0.0 FINAL-RELEASE NOTE
 - **New Features**
   - This update allows you to launch the WEB UI API on application startup
