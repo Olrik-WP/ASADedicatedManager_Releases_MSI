@@ -1,3 +1,7 @@
+## Version 2.4.8.0 FINAL-RELEASE NOTE
+- **New Features**
+  - Added a button to mark backups already converted in store (this allows to remove the command lines if the backups were already converted before adding in the manager)
+
 ## Version 2.4.5.0 FINAL-RELEASE NOTE
 - ** Bug Fixes**
   - Fixed a bug where backup .ini files (.bak) were not replaceable because copied in readonly an error message indicated access denied
