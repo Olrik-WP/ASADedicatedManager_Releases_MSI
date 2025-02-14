@@ -1,3 +1,9 @@
+## Version 2.4.4.0 FINAL-RELEASE NOTE
+- **New Features**
+  - During the next updates the user installation path will be saved (this update writes the information in the registry so it will be for the next update)
+- ** Bug Fixes**
+  - Fixed a bug that prevented the reset password window from being topmost (the window was inaccessible and hidden behind the login window)
+
 ## Version 2.4.1.0 FINAL-RELEASE NOTE
 - **New Features**
   - Added Astraeos_WP map from new Astraeos DLC
