@@ -1,3 +1,7 @@
+## Version 2.4.5.0 FINAL-RELEASE NOTE
+- ** Bug Fixes**
+  - Fixed a bug where backup .ini files (.bak) were not replaceable because copied in readonly an error message indicated access denied
+
 ## Version 2.4.4.0 FINAL-RELEASE NOTE
 - **New Features**
   - During the next updates the user installation path will be saved (this update writes the information in the registry so it will be for the next update)
