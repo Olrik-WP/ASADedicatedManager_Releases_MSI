@@ -1,3 +1,21 @@
+## Version 2.5.0.1 FINAL-RELEASE NOTE
+- **New Features**
+  - Added the possibility to see the logged in account (hidden by default)
+  - Slight modification of the placement of the login log out buttons
+  - Added the possibility to modify your email address **PLEASE NOTE: validation of the new address will be necessary, do not enter a fake address or you will lose your account!**
+- ** Bug Fixes**
+  - Fixed a bug in the WEB UI API autostart logic
+- **Known issues**
+  - A bug in the MSI overwrites user-modified ITEMTESMPLATE at the moment if you manually modify them you must backup the folder before updating and restore it manually until a fix is ​​made
+
+## Version 2.4.9.0 PRE-RELEASE NOTE
+- ** Bug Fixes**
+  - Fixed a bug in the WEB UI API autostart logic
+- **New Features**
+  - Added the possibility to see the logged in account (hidden by default)
+  - Slight modification of the placement of the login log out buttons
+  - Added the possibility to modify your email address **PLEASE NOTE: validation of the new address will be necessary, do not enter a fake address or you will lose your account!**
+
 ## Version 2.4.8.0 FINAL-RELEASE NOTE
 - **New Features**
   - Added a button to mark backups already converted in store (this allows to remove the command lines if the backups were already converted before adding in the manager)
