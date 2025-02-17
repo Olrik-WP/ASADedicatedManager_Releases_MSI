@@ -1,3 +1,12 @@
+## Version 2.5.0.0 FINAL-RELEASE NOTE
+- ** Bug Fixes**
+  - Fixed a bug in the WEB UI API autostart logic
+  - Fixed a bug in the MSI that overwrote user-modified ITEMTEMPLATEs, they are now preserved during an update and are no longer replaced (note this will happen for the next updates)
+- **New Features**
+  - Added the possibility to see the logged in account (hidden by default)
+  - Slight modification of the placement of the login log out buttons
+  - Added the possibility to modify your email address **PLEASE NOTE: validation of the new address will be necessary, do not enter a fake address or you will lose your account!**
+
 ## Version 2.4.9.0 PRE-RELEASE NOTE
 - ** Bug Fixes**
   - Fixed a bug in the WEB UI API autostart logic
