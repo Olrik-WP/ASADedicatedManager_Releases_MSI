@@ -1,12 +1,25 @@
+## Version 2.5.1.0 FINAL-RELEASE NOTE
+- **New Features**
+  - Changed the timeout for downloading manager updates from 60 seconds to 10 minutes for slow connections and improved logs (this will only be effective for the next update)
+  - Application now stores CSV data in `%AppData%\ASADedicatedManager\ItemsTemplate`, preventing loss during updates.
+  - CSV files are automatically copied from the installation directory if missing.
+  - Added a button to manually reset CSV files to their default state.
+  - Added a new CSV management window to allow users to modify game data in a controlled environment.
+  - Users can now add, edit, and delete creatures and items directly from the application.
+  - Added a "Delete Selected" button in the CSV editor to remove entries safely.
+- **Bug Fixes**
+  - Fixed an issue where MSI updates would overwrite user-modified CSV files.
+  - Fixed potential error message when CSV files were missing on first launch.
+
 ## Version 2.5.0.1 FINAL-RELEASE NOTE
 - **New Features**
   - Added the possibility to see the logged in account (hidden by default)
   - Slight modification of the placement of the login log out buttons
   - Added the possibility to modify your email address **PLEASE NOTE: validation of the new address will be necessary, do not enter a fake address or you will lose your account!**
-- ** Bug Fixes**
+- **Bug Fixes**
   - Fixed a bug in the WEB UI API autostart logic
 - **Known issues**
-  - A bug in the MSI overwrites user-modified ITEMTESMPLATE at the moment if you manually modify them you must backup the folder before updating and restore it manually until a fix is ​​made
+  - A bug in the MSI overwrites user-modified ITEMTESMPLATE at the moment if you manually modify them you must backup the folder before updating and restore it manually until a fix is made
 
 ## Version 2.4.9.0 PRE-RELEASE NOTE
 - ** Bug Fixes**
