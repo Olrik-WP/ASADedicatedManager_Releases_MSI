@@ -1,15 +1,3 @@
-## Version 2.7.2.0 PRE-RELEASE NOTE
-- **New Features:**
-  - Added automatic update checking via CDN or SteamCMD with configurable check intervals and restart warnings
-  - Added scheduled server restarts with selectable days of the week and configurable times
-  - Added options to exclude specific servers from scheduled restarts
-  - Added RCON warnings before scheduled server restarts
-  - Added customizable update cache folder path and logging functionality for CDN updates
-- **Improvements:**
-  - Implemented the ability to exclude cinematics (Movies folder) from updates to optimize update size and performance
-  - Enhanced server restart warning system with customizable messages including a configurable delay between server restart notifications and actual restart
-  - Complete overhaul of the message system
-
 ## Version 2.7.1.0 FINAL-RELEASE NOTE
 - **CRITICAL Bug Fixes**
   - Fixed a bug in the order and logic of reactivating the start button of other profiles when a server is started
