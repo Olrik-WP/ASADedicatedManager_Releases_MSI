@@ -1,3 +1,8 @@
+## Version 2.5.2.0 FINAL-RELEASE NOTE
+- **Improvements**
+  -  Allow value lower than 1.0 in PerLevelStatsMultiplier Tab
+  - The msi will now do updates in passive mode (For next update)
+
 ## Version 2.5.1.0 FINAL-RELEASE NOTE
 - **New Features**
   - Changed the timeout for downloading manager updates from 60 seconds to 10 minutes for slow connections and improved logs (this will only be effective for the next update)
