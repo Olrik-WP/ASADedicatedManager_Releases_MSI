@@ -1,3 +1,20 @@
+## Version 2.5.4.0 PRE-RELEASE NOTE
+- **Improvements**
+  - Cache update:
+    - If no profile is selected a warning is raised
+    - Cache version is now automatically checked after a cache update
+    - Copy cache button is now disabled if cache is not up to date
+    - The cache version is now automatically checked after a cache update
+    - The cache copy button is now disabled if the cache is not up to date
+    - The Cache update window is now in modal mode, it is no longer possible to interact with other windows
+    - Closing the Cache update window is now impossible during cache copy or update operations
+    - Added an information message
+    - Added the possibility to check the validation of cache files via steamcmd
+    - Added steamcmd logs
+    - The window is now centered when opened
+- **Bug Fixes**
+  - Fixed an issue with plugin: Use Pelayori Advanced Messages Ascended and API activation logique
+
 ## Version 2.5.3.0 PRE-RELEASE NOTE
 Various fixes
 Start of the implementation of the cache update (only manual for this first implementation)
