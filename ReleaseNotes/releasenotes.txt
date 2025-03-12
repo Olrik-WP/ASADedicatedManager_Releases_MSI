@@ -1,3 +1,17 @@
+## Version 2.5.5.0 PRE-RELEASE NOTE
+- **Improvements**
+  - Cache update:
+    - Added a question to delete the cache after copying
+    - Added button to delete cache
+    - Added a button to reinstall steamcmd
+    - Added 3 retry similar to the classic update process with all error and delete manifest and reinstall steamcmd
+    - Added a clear error message when the cache update window was first opened, indicating that the folder path to store the cache should be set
+    - Improved the activation logic for the cache update window buttons
+- **Bug Fixes**
+  - Fixed missing steamcmd issue after choosing cache path
+  - Fixed the missing appmanifest file when the cache update window was first opened
+  - When updating the cache, improved and removed the UI blocking. witching to InvokeAsync enqueues the update on the UI thread and returns immediately, letting the UI remain more responsive.
+
 ## Version 2.5.4.0 PRE-RELEASE NOTE
 - **Improvements**
   - Cache update:
