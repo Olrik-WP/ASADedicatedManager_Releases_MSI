@@ -1,3 +1,34 @@
+## Version 2.5.6.0 FINAL-RELEASE NOTE
+- **New Features**
+  - Initial implementation of the cache update system (manual for this first version)
+  - You will find the new button next to the WEB UI API
+- **Improvements**
+  - **Cache Update Enhancements:**
+    - Added a question to delete the cache after copying
+    - Added a button to delete the cache
+    - Added a button to reinstall steamcmd
+    - Added 3 retry attempts similar to the classic update process, with all errors handled, manifest deletion, and steamcmd reinstallation
+    - Added a clear error message when opening the cache update window for the first time, indicating that the folder path to store the cache should be set
+    - Improved the activation logic for cache update window buttons
+    - If no profile is selected, a warning is raised
+    - Cache version is now automatically checked after a cache update
+    - The "Copy Cache" button is now disabled if the cache is not up to date
+    - The Cache update window is now in modal mode, preventing interaction with other windows while open
+    - Closing the Cache update window is now impossible during cache copy or update operations
+    - Added an information message
+    - Added the possibility to check cache file validation via steamcmd
+    - Added steamcmd logs
+    - The Cache update window is now centered when opened
+    - Removed box messages in favor of logs
+    - Added color to logs
+- **Bug Fixes**
+  - Fixed missing steamcmd issue after choosing cache path
+  - Fixed the missing appmanifest file when the cache update window was first opened
+  - When updating the cache, improved performance and removed UI blocking:
+    - Switched to `InvokeAsync` to enqueue updates on the UI thread and return immediately, keeping the UI more responsive
+  - **Fixed an issue with plugin: Use Pelayori Advanced Messages Ascended and API activation logic**
+  - Various fixes
+
 ## Version 2.5.5.0 PRE-RELEASE NOTE
 - **Improvements**
   - Cache update:
@@ -30,8 +61,8 @@
   - Fixed an issue with plugin: Use Pelayori Advanced Messages Ascended and API activation logique
 
 ## Version 2.5.3.0 PRE-RELEASE NOTE
-Various fixes
-Start of the implementation of the cache update (only manual for this first implementation)
+- Various fixes
+- Start of the implementation of the cache update (only manual for this first implementation)
 
 ## Version 2.5.2.0 FINAL-RELEASE NOTE
 - **Improvements**
