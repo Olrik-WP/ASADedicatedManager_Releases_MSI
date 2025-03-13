@@ -1,3 +1,10 @@
+## Version 2.5.7.0 FINAL-RELEASE NOTE
+- **Improvements**
+  - Added files copied from the cache to profiles to the logs
+- **Bug Fixes**
+  - Fixed the placement of some elements in the CacheUpdate window when resizing
+  - Added missing copies of some non-critical files (Steam and manifest files)
+
 ## Version 2.5.6.0 FINAL-RELEASE NOTE
 - **New Features**
   - Initial implementation of the cache update system (manual for this first version)
