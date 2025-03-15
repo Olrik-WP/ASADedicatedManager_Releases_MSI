@@ -1,3 +1,18 @@
+## Version 2.5.9.0 PRE-RELEASE NOTE
+-**New Features**
+  - **Manual File Verification**
+    - You can now restart the **file verification process**, even if your version is already up to date.
+  - **Enhanced Logging & Debugging**
+    - Many additional logs have been added to **improve transparency**
+    - You can now see detailed information on which files need to be downloaded.
+  - **Download Speed Display**
+    - If a file must be downloaded, the **current download speed** will now be displayed.
+  - **Advanced File Comparison**
+    - The system now **displays file size and hash** during comparison for better accuracy.
+  - **Rollback to Previous Version**
+    - A **new button** has been added to allow rolling back to the previous version!
+- This update brings **more control, better visibility, and an extra safety layer** with rollback support. Let us know what you think!
+
 ## Version 2.5.8.0 PRE-RELEASE NOTE
 - **First Pre-Release – Introducing the Private Server Updater**
   - This is the **first pre-release** of our brand-new **Private Server Updater**, designed to replace **SteamCMD** and provide a **faster, more reliable, and fully automated** update system for ARK: Ascended servers.  
