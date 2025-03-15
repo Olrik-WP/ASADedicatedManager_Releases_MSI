@@ -1,3 +1,17 @@
+## Version 2.5.8.0 PRE-RELEASE NOTE
+- **First Pre-Release – Introducing the Private Server Updater**
+  - This is the **first pre-release** of our brand-new **Private Server Updater**, designed to replace **SteamCMD** and provide a **faster, more reliable, and fully automated** update system for ARK: Ascended servers.  
+- **Key Features**  
+- **Automated Update Detection**  
+  - The backend **checks for updates every 10 minutes**.  
+  - If a new version is available, it is automatically **downloaded (~1 hour)** and **uploaded to Cloudflare R2 (~30 minutes)**.  
+  - After this process Updates become **immediately available** to all users.
+  - The bucket was placed in the northern United States based on the percentage of users.
+- **Optimized File Management**  
+  - **Smart file exclusion**: Large unnecessary files (e.g., **21GB of videos**) can be **skipped**, saving bandwidth and speeding up the process.  
+  - The update system **compares files** before downloading, ensuring that **only changed files** are updated.  
+- This **pre-release is a first step**, and we are actively working to enhance and refine the system. **Your feedback is crucial—let us know what you think!**
+
 ## Version 2.5.7.0 FINAL-RELEASE NOTE
 - **Improvements**
   - Added files copied from the cache to profiles to the logs
