@@ -1,3 +1,10 @@
+## Version 2.6.0.0 PRE-RELEASE NOTE
+- **Improvements**
+  - Private CDN, Modified the download method to add 3 retries in case of failure.
+  - Private CDN, increased HTTP timeout to 30 minutes to improve stability.
+- **Bug Fixes**
+  - **Fixed multiple crashes when copying the cache (CacheUpdate and Private CDN) to profiles if files were open, in use, or read-only.**
+
 ## Version 2.5.9.0 PRE-RELEASE NOTE
 -**New Features**
   - **Manual File Verification**
