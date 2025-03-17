@@ -1,3 +1,12 @@
+## Version 2.6.1.0 PRE-RELEASE NOTE
+- **Improvements**
+  - Improved the logic for enabling and disabling buttons in the private CDN window
+  - Closing the Update from Private CDN window is now impossible during cache copy or update operations
+  - **Re-added `validate` to all SteamCMD update commands (previously removed to save time).**
+- **Bug Fixes**
+  - Fixed a crash caused by modifying the HttpClient timeout after sending requests.
+  - **Enforced CultureInfo.InvariantCulture for numeric formatting to always use a dot as the decimal separator, regardless of UI language. Fixes bug in tab overrides of ',' and '.' in all languages**
+
 ## Version 2.6.0.0 PRE-RELEASE NOTE
 - **Improvements**
   - Private CDN, Modified the download method to add 3 retries in case of failure.
