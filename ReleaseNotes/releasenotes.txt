@@ -1,3 +1,54 @@
+## Version 2.6.2.0 FINAL-RELEASE NOTE
+- **Improvements**
+  - **Re-added `validate` to all SteamCMD update commands (previously removed to save time).**
+- **Bug Fixes**
+  - **Enforced CultureInfo.InvariantCulture for numeric formatting to always use a dot as the decimal separator, regardless of UI language. Fixes bug in tab overrides of ',' and '.' in all languages**
+
+## Version 2.6.1.0 PRE-RELEASE NOTE
+- **Improvements**
+  - Improved the logic for enabling and disabling buttons in the private CDN window
+  - Closing the Update from Private CDN window is now impossible during cache copy or update operations
+  - **Re-added `validate` to all SteamCMD update commands (previously removed to save time).**
+- **Bug Fixes**
+  - Fixed a crash caused by modifying the HttpClient timeout after sending requests.
+  - **Enforced CultureInfo.InvariantCulture for numeric formatting to always use a dot as the decimal separator, regardless of UI language. Fixes bug in tab overrides of ',' and '.' in all languages**
+
+## Version 2.6.0.0 PRE-RELEASE NOTE
+- **Improvements**
+  - Private CDN, Modified the download method to add 3 retries in case of failure.
+  - Private CDN, increased HTTP timeout to 30 minutes to improve stability.
+- **Bug Fixes**
+  - **Fixed multiple crashes when copying the cache (CacheUpdate and Private CDN) to profiles if files were open, in use, or read-only.**
+
+## Version 2.5.9.0 PRE-RELEASE NOTE
+-**New Features**
+  - **Manual File Verification**
+    - You can now restart the **file verification process**, even if your version is already up to date.
+  - **Enhanced Logging & Debugging**
+    - Many additional logs have been added to **improve transparency**
+    - You can now see detailed information on which files need to be downloaded.
+  - **Download Speed Display**
+    - If a file must be downloaded, the **current download speed** will now be displayed.
+  - **Advanced File Comparison**
+    - The system now **displays file size and hash** during comparison for better accuracy.
+  - **Rollback to Previous Version**
+    - A **new button** has been added to allow rolling back to the previous version!
+- This update brings **more control, better visibility, and an extra safety layer** with rollback support. Let us know what you think!
+
+## Version 2.5.8.0 PRE-RELEASE NOTE
+- **First Pre-Release – Introducing the Private Server Updater**
+  - This is the **first pre-release** of our brand-new **Private Server Updater**, designed to replace **SteamCMD** and provide a **faster, more reliable, and fully automated** update system for ARK: Ascended servers.  
+- **Key Features**  
+- **Automated Update Detection**  
+  - The backend **checks for updates every 10 minutes**.  
+  - If a new version is available, it is automatically **downloaded (~1 hour)** and **uploaded to Cloudflare R2 (~30 minutes)**.  
+  - After this process Updates become **immediately available** to all users.
+  - The bucket was placed in the northern United States based on the percentage of users.
+- **Optimized File Management**  
+  - **Smart file exclusion**: Large unnecessary files (e.g., **21GB of videos**) can be **skipped**, saving bandwidth and speeding up the process.  
+  - The update system **compares files** before downloading, ensuring that **only changed files** are updated.  
+- This **pre-release is a first step**, and we are actively working to enhance and refine the system. **Your feedback is crucial—let us know what you think!**
+
 ## Version 2.5.7.0 FINAL-RELEASE NOTE
 - **Improvements**
   - Added files copied from the cache to profiles to the logs
