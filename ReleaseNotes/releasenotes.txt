@@ -1,3 +1,9 @@
+## Version 2.6.2.0 FINAL-RELEASE NOTE
+- **Improvements**
+  - **Re-added `validate` to all SteamCMD update commands (previously removed to save time).**
+- **Bug Fixes**
+  - **Enforced CultureInfo.InvariantCulture for numeric formatting to always use a dot as the decimal separator, regardless of UI language. Fixes bug in tab overrides of ',' and '.' in all languages**
+
 ## Version 2.6.1.0 PRE-RELEASE NOTE
 - **Improvements**
   - Improved the logic for enabling and disabling buttons in the private CDN window
