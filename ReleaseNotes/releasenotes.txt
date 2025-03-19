@@ -1,3 +1,15 @@
+## Version 2.6.3.0 PRE-RELEASE NOTE
+-**New Features**
+  - Added automatic deletion of server logs before server startup.
+  - Incorporating the work of @WXSO who translated the manager into Turkish
+- **Improvements**
+  - Improved readability and clarity of server startup logs.
+  - Optimized server startup logic for better reliability.
+- **Bug Fixes**
+  - Fixed potential server startup failures occurring when the server launches too quickly.
+  - Attempt to fix the error message "the process cannot access the file because it is in use by another process" when reading crash log files Error messages are now displayed directly in the log area instead of intrusive dialog boxes
+  - Fixed a bug that could prevent the CDN window from closing
+
 ## Version 2.6.2.0 FINAL-RELEASE NOTE
 - **Improvements**
   - **Re-added `validate` to all SteamCMD update commands (previously removed to save time).**
