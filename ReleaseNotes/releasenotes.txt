@@ -1,3 +1,12 @@
+## Version 2.6.4.0 PRE-RELEASE NOTE
+- **Improvements**
+  - In the CDN window, the copy of skipped profiles because they are started or running is now indicated and an error at the end of the copy lists all the impacted profiles.
+- **Bug Fixes**
+  - Bug Fix Improved tab management now allows you to start/stop all servers even after moving or rearranging tabs, eliminating app freezes and crashes.
+- **UI Performance**
+  - Fixed UI freezing across all application operations including SteamCMD server updates, and SteamCMD cache management by implementing fully asynchronous file operations and optimized process handling.
+  - Fixed a bug that caused the UI to freeze when starting the server during the process check following changes made to the server startup code in the last update
+
 ## Version 2.6.3.0 PRE-RELEASE NOTE
 -**New Features**
   - Added automatic deletion of server logs before server startup.
