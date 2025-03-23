@@ -1,3 +1,50 @@
+## Version 2.7.0.0 FINAL-RELEASE NOTE
+-**New Features**
+- **Private CDN Updater (Public Launch)**
+  - Official **first public release** of the **Private Cloud Updater**, a major evolution designed to **replace SteamCMD** with a **faster, more reliable, and fully automated** system for ARK: Ascended servers.
+  - **How it work**  
+    - The backend **checks for updates every 10 minutes**.  
+    - New versions are **automatically downloaded (~1 hour)** and **On our private cloud (~30 minutes)**.  
+    - Updates then become **immediately available** to all users.
+  - **Optimized File Management**  
+    - **Smart file exclusion** of large unnecessary files (e.g., **21GB of videos**) for faster, bandwidth-efficient updates.  
+    - **File comparison** ensures that only changed files are updated.
+  - **Advanced File Comparison**
+    - Displays **file size and hash** for precise comparisons.
+  - **Download Speed Display**
+    - Live indication of **current download speed** during updates.
+  - **Rollback to Previous Version**
+    - Added a **new button** to rollback to the previous version with a single click.
+  - **Manual File Verification**
+    - You can now **restart file verification** even if the version is already up to date.
+  - This update brings **more control, better visibility, and extra safety**—your feedback is welcome!
+- **Language Support**
+  - Added full **Turkish translation** thanks to @WXSO!
+- **Improvements**
+  - **User Interface & Experience**
+    - Improved readability and clarity of server startup logs.
+    - Enhanced UI responsiveness and eliminated freezes by:
+      - Making all file operations fully **asynchronous**.
+      - Optimizing **SteamCMD server updates** and cache management.
+    - Improved tab management: you can now **start/stop all servers** even after rearranging tabs.
+    - Clearer indication of profiles skipped during copy operations if they are started or running.
+    - Server startup logic optimized for **better reliability**.
+    - Refined logic for enabling/disabling buttons in the Private CDN interface.
+    - Disabled window closure during cache copy/update to prevent accidental interruptions.
+    - SteamCMD update commands now **include `validate`** again for integrity checks.
+- **Bug Fixes**
+  - Fixed UI freeze when starting servers due to issues in the startup process.
+  - Resolved potential startup failures when the server launches too quickly.
+  - Addressed error: *“The process cannot access the file because it is in use by another process”* — error messages now appear directly in the log area.
+  - Fixed bug preventing the CDN window from closing.
+  - Eliminated crash caused by modifying `HttpClient` timeout post-request.
+  - Enforced `CultureInfo.InvariantCulture` for number formatting to fix issues with `,` and `.` across different languages.
+  - Fixed multiple crashes when copying cache files that were in use or read-only.
+- **Note**
+  - This release marks a **major milestone** with the official rollout of the Private Server Updater. After multiple iterations and internal testing, we’re proud to open it to the public. Expect **faster updates**, **smoother experiences**, and **more control** than ever before.
+  - The next update will introduce **full automation of server updates via CDN**, including **automatic server shutdown and restart** during the update process.
+  - Please share your feedback—we’re just getting started!
+
 ## Version 2.6.4.0 PRE-RELEASE NOTE
 - **Improvements**
   - In the CDN window, the copy of skipped profiles because they are started or running is now indicated and an error at the end of the copy lists all the impacted profiles.
