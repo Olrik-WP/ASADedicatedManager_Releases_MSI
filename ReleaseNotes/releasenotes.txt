@@ -1,3 +1,7 @@
+## Version 2.7.1.0 FINAL-RELEASE NOTE
+- **CRITICAL Bug Fixes**
+  - Fixed a bug in the order and logic of reactivating the start button of other profiles when a server is started
+
 ## Version 2.7.0.0 FINAL-RELEASE NOTE
 -**New Features**
 - **Private CDN Updater (Public Launch)**
