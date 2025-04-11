@@ -1,3 +1,24 @@
+## Version 2.7.3.0 PRE-RELEASE NOTE
+- **Improvements:**
+- New method `KillExistingSteamCmdProcesses`:
+  - Searches for all processes named `steamcmd`
+  - Logs information about each detected process (PID, path)
+  - Terminates each process and waits for it to exit
+  - Verifies afterward that no process remains active
+- **Changes in `UpdateCacheAsync`:**
+  - Calls `KillExistingSteamCmdProcesses` at the beginning of the method to ensure cleanup before starting
+  - Calls `KillExistingSteamCmdProcesses` before each retry attempt
+  - Increased delay between retries from 5 to 15 seconds
+  - Added enhanced logging to track the cleanup process
+- **Safety Mechanisms**
+  - Waits 5 seconds for each terminated process
+  - Additional verification after cleanup
+  - Error handling during process termination
+- **Bug Fixes**
+  - Change of the color of invisible logs in SteamCMD windows
+- **Note**
+  - These changes are intended to prevent the application from freezing by ensuring only one SteamCMD process runs at a time and by guaranteeing proper cleanup between attempts.
+
 ## Version 2.7.2.0 PRE-RELEASE NOTE
 - **New Features:**
   - Added automatic update checking via CDN or SteamCMD with configurable check intervals and restart warnings
