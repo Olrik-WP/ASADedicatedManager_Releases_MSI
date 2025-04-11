@@ -1,3 +1,21 @@
+## Version 2.7.4.0 PRE-RELEASE NOTE
+- **Improvements:**
+- **Changes in `SteamCMD Cache Window`:**
+  - The UI is now always reset, even in case of an error.
+  - Buttons are always re-enabled regardless of outcome.
+  - The `isDownloading` flag is consistently reset to `false`.
+  - The window can now be closed normally after an error occurs.
+  - Better Logs
+  - Better SteamCMD running Process check
+  - Creating the manifest file if SteamCMD is reinstalled 
+  - Added the ability to cancel a SteamCMD update (can be time-consuming if the steamCMD process doesn't give up immediately)
+  - Closing the SteamCMD Window is now possible by canceling the current process
+  - Fixed an issue with duplicate logs
+  - Better handling of errors in logs, management of exceptions to avoid application crashes
+  - Added log rotation 5 Files 5Mo max Lines C:\Users\xxx\AppData\Roaming\ASADedicatedManager\logs
+  - Reboots can now be scheduled by minutes
+  - Fixed a bug that prevented reboots from being done
+
 ## Version 2.7.3.0 PRE-RELEASE NOTE
 - **Improvements:**
 - New method `KillExistingSteamCmdProcesses`:
