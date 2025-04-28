@@ -1,3 +1,86 @@
+## Version 2.7.6.0 FINAL-RELEASE NOTE
+- **New Features:**
+  - Added automatic update checking via CDN or SteamCMD with configurable check intervals and restart warnings.
+  - Added scheduled server restarts with selectable days of the week and configurable times.
+  - Added options to exclude specific servers from scheduled restarts.
+  - Added RCON warnings before scheduled server restarts.
+  - Added customizable update cache folder path and logging functionality for CDN updates.
+- **Improvements:**
+  - **Changes in `SteamCMD Cache Window`:**
+    - The UI is now always reset, even in case of an error.
+    - Buttons are always re-enabled regardless of outcome.
+    - The `isDownloading` flag is consistently reset to `false`.
+    - The window can now be closed normally after an error occurs.
+    - Better Logs.
+    - Better SteamCMD running Process check.
+    - Creating the manifest file if SteamCMD is reinstalled.
+    - Added the ability to cancel a SteamCMD update (can be time-consuming if the SteamCMD process doesn't give up immediately).
+    - Closing the SteamCMD Window is now possible by canceling the current process.
+       - New method `KillExistingSteamCmdProcesses`:
+       - Searches for all processes named `steamcmd`.
+      - Logs information about each detected process (PID, path).
+      - Terminates each process and waits for it to exit.
+      - Verifies afterward that no process remains active.
+  - Fixed an issue with duplicate logs.
+  - Better handling of errors in logs, management of exceptions to avoid application crashes.
+  - Added log rotation: 5 files, 5MB max per file, located at `C:\Users\xxx\AppData\Roaming\ASADedicatedManager\logs`.
+- Implemented the ability to exclude cinematics (Movies folder) from updates to optimize update size and performance.
+- Enhanced server restart warning system with customizable messages including a configurable delay between server restart notifications and actual restart.
+- Complete overhaul of the message system.
+- **Known Bugs**
+  - In the SteamCMD Cache Update window, after cancelling an update, the cache may incorrectly indicate that it is up to date when it is not.
+
+## Version 2.7.4.0 PRE-RELEASE NOTE
+- **Improvements:**
+- **Changes in `SteamCMD Cache Window`:**
+  - The UI is now always reset, even in case of an error.
+  - Buttons are always re-enabled regardless of outcome.
+  - The `isDownloading` flag is consistently reset to `false`.
+  - The window can now be closed normally after an error occurs.
+  - Better Logs
+  - Better SteamCMD running Process check
+  - Creating the manifest file if SteamCMD is reinstalled 
+  - Added the ability to cancel a SteamCMD update (can be time-consuming if the steamCMD process doesn't give up immediately)
+  - Closing the SteamCMD Window is now possible by canceling the current process
+  - Fixed an issue with duplicate logs
+  - Better handling of errors in logs, management of exceptions to avoid application crashes
+  - Added log rotation 5 Files 5Mo max Lines C:\Users\xxx\AppData\Roaming\ASADedicatedManager\logs
+  - Reboots can now be scheduled by minutes
+  - Fixed a bug that prevented reboots from being done
+
+## Version 2.7.3.0 PRE-RELEASE NOTE
+- **Improvements:**
+- New method `KillExistingSteamCmdProcesses`:
+  - Searches for all processes named `steamcmd`
+  - Logs information about each detected process (PID, path)
+  - Terminates each process and waits for it to exit
+  - Verifies afterward that no process remains active
+- **Changes in `UpdateCacheAsync`:**
+  - Calls `KillExistingSteamCmdProcesses` at the beginning of the method to ensure cleanup before starting
+  - Calls `KillExistingSteamCmdProcesses` before each retry attempt
+  - Increased delay between retries from 5 to 15 seconds
+  - Added enhanced logging to track the cleanup process
+- **Safety Mechanisms**
+  - Waits 5 seconds for each terminated process
+  - Additional verification after cleanup
+  - Error handling during process termination
+- **Bug Fixes**
+  - Change of the color of invisible logs in SteamCMD windows
+- **Note**
+  - These changes are intended to prevent the application from freezing by ensuring only one SteamCMD process runs at a time and by guaranteeing proper cleanup between attempts.
+
+## Version 2.7.2.0 PRE-RELEASE NOTE
+- **New Features:**
+  - Added automatic update checking via CDN or SteamCMD with configurable check intervals and restart warnings
+  - Added scheduled server restarts with selectable days of the week and configurable times
+  - Added options to exclude specific servers from scheduled restarts
+  - Added RCON warnings before scheduled server restarts
+  - Added customizable update cache folder path and logging functionality for CDN updates
+- **Improvements:**
+  - Implemented the ability to exclude cinematics (Movies folder) from updates to optimize update size and performance
+  - Enhanced server restart warning system with customizable messages including a configurable delay between server restart notifications and actual restart
+  - Complete overhaul of the message system
+
 ## Version 2.7.1.0 FINAL-RELEASE NOTE
 - **CRITICAL Bug Fixes**
   - Fixed a bug in the order and logic of reactivating the start button of other profiles when a server is started
