@@ -1,4 +1,4 @@
-# Version 2.7.5.0 FINAL-RELEASE NOTE
+## Version 2.7.6.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Added automatic update checking via CDN or SteamCMD with configurable check intervals and restart warnings.
   - Added scheduled server restarts with selectable days of the week and configurable times.
