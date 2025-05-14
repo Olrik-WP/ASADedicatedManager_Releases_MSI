@@ -1,3 +1,13 @@
+## Version 2.7.7.0 PRE-RELEASE NOTE
+- **Improvements:**
+  - Changed the restart methods to allow 120 seconds instead of 60 seconds to detect if the server is running.
+- **Bug Fixes**
+  - Fixed a bug in the SteamCMD Cache Update window confirmation
+  - Fixed the Steam CMD Kill methods (now immediate when clicking the cancel button or closing the window)
+  - Fixed a potential crash in the SteamCMD Cache Update
+  - Fixed a bug in the SteamCMD Cache Update window that caused the cancel button to be completely disabled on a second cancel attempt
+  - Added an informational message indicating that closing the window will cancel the update
+
 ## Version 2.7.6.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Added automatic update checking via CDN or SteamCMD with configurable check intervals and restart warnings.
