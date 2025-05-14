@@ -1,3 +1,7 @@
+## Version 2.7.8.0 PRE-RELEASE NOTE
+- **Improvements:**
+  - Added more delays between reboots in the Update Reboot Automation Settings window. Max 5 minutes
+
 ## Version 2.7.7.0 PRE-RELEASE NOTE
 - **Improvements:**
   - Changed the restart methods to allow 120 seconds instead of 60 seconds to detect if the server is running.
