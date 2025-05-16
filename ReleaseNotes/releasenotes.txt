@@ -1,12 +1,18 @@
+## Version 2.8.0.0 PRE-RELEASE NOTE
+- **Bug Fixes**
+ - Fixed duplicated minute value in RCON warning message before scheduled server restart.
+ - Clarified functionality by renaming the button to "Restart All Servers" and adding a new "Stop Update Restart All Servers" button to perform a full update cycle.
+ - Discord Bot Updated the !update ProfileName command to stop, fully update, and restart servers directly from Discord. UNTESTED, POTENTIAL CRASHES
+
 ## Version 2.7.9.0 PRE-RELEASE NOTE
 - **New Features:**
   - Automated Config Backup is Here!**
-  - **Custom backup intervals** (e.g., every 60 minutes)
-  - **Backup retention control** — keep only the latest X backups
-  - Full **manual control** with "Backup Now" and "Restore Backup" options  
+  - **Custom backup intervals** e.g., every 60 minutes
+  - **Backup retention control** keep only the latest X backups
+  - Full **manual control** with Backup Now and Restore Backup options
   - **Log tracking** for all backup operations
-  - Direct access to backup folder via **Open Folder**  
-  - All configuration backups are stored as `.zip` archives and can be restored with a single click — making server maintenance easier and safer than ever.
+  - Direct access to backup folder via **Open Folder**
+  - All configuration backups are stored as .zip archives and can be restored with a single click making server maintenance easier and safer than ever.
   - This update brings peace of mind to all server admins. Say goodbye to lost settings and misconfigurations!
 - **Bug Fixes**
   - Improved player name parsing to support commas and flexible spacing in connection list and create backups for players profile.
