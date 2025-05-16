@@ -1,3 +1,17 @@
+## Version 2.7.9.0 PRE-RELEASE NOTE
+- **New Features:**
+  - Automated Config Backup is Here!**
+  - **Custom backup intervals** (e.g., every 60 minutes)
+  - **Backup retention control** — keep only the latest X backups
+  - Full **manual control** with "Backup Now" and "Restore Backup" options  
+  - **Log tracking** for all backup operations
+  - Direct access to backup folder via **Open Folder**  
+  - All configuration backups are stored as `.zip` archives and can be restored with a single click — making server maintenance easier and safer than ever.
+  - This update brings peace of mind to all server admins. Say goodbye to lost settings and misconfigurations!
+- **Bug Fixes**
+  - Improved player name parsing to support commas and flexible spacing in connection list and create backups for players profile.
+  - Fixed an issue where RestartDelayMinutes was not properly saved or loaded due to restrictive validation and incorrect log display.
+
 ## Version 2.7.8.0 PRE-RELEASE NOTE
 - **Improvements:**
   - Added more delays between reboots in the Update Reboot Automation Settings window. Max 5 minutes
