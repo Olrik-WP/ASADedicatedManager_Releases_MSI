@@ -1,8 +1,13 @@
+## Version 2.8.1.0 PRE-RELEASE NOTE
+- Fixed an application crash when copying the token to the clipboard in the WEB UI API
+- Fixed the server status ellipse when updating server via Discord
+- Renamed the button in the Web UI API to correctly reflect the code from *Update Restart* Server to **Stop Update Server**
+
 ## Version 2.8.0.0 PRE-RELEASE NOTE
 - **Bug Fixes**
- - Fixed duplicated minute value in RCON warning message before scheduled server restart.
- - Clarified functionality by renaming the button to "Restart All Servers" and adding a new "Stop Update Restart All Servers" button to perform a full update cycle.
- - Discord Bot Updated the !update ProfileName command to stop, fully update, and restart servers directly from Discord. UNTESTED, POTENTIAL CRASHES
+ - Fixed duplicated minute value in RCON warning message before scheduled server restart
+ - Clarified functionality by renaming the button to "Restart All Servers" and adding a new "Stop Update Restart All Servers" button to perform a full update cycle
+ - Discord Bot Updated the !update ProfileName command to stop, fully update, and restart servers directly from Discord
 
 ## Version 2.7.9.0 PRE-RELEASE NOTE
 - **New Features:**
