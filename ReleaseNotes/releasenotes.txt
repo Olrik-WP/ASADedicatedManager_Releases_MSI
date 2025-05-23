@@ -1,3 +1,70 @@
+## Version 2.8.2.0 FINAL-RELEASE NOTE
+- **New Features:**
+  - Automated Config Backup is Here!**
+  - **Custom backup intervals** e.g., every 60 minutes
+  - **Backup retention control** keep only the latest X backups
+  - Full **manual control** with Backup Now and Restore Backup options
+  - **Log tracking** for all backup operations
+  - Direct access to backup folder via **Open Folder**
+  - All configuration backups are stored as .zip archives and can be restored with a single click making server maintenance easier and safer than ever.
+  - This update brings peace of mind to all server admins. Say goodbye to lost settings and misconfigurations!
+- **Improvements:**
+  - Changed the restart methods to allow 120 seconds instead of 60 seconds to detect if the server is running.
+  - Added more delays between reboots in the Update Reboot Automation Settings window. Max 5 minutes
+  - Renamed the button in the Web UI API to correctly reflect the code from *Update Restart* Server to **Stop Update Server**
+- **Bug Fixes**
+  - Fixed a bug in the SteamCMD Cache Update window confirmation
+  - Fixed the Steam CMD Kill methods (now immediate when clicking the cancel button or closing the window)
+  - Fixed a potential crash in the SteamCMD Cache Update
+  - Fixed a bug in the SteamCMD Cache Update window that caused the cancel button to be completely disabled on a second cancel attempt
+  - Added an informational message indicating that closing the window will cancel the update
+  - Improved player name parsing to support commas and flexible spacing in connection list and create backups for players profile.
+  - Fixed an issue where RestartDelayMinutes was not properly saved or loaded due to restrictive validation and incorrect log display.
+  - Fixed duplicated minute value in RCON warning message before scheduled server restart
+  - Clarified functionality by renaming the button to "Restart All Servers" and adding a new "Stop Update Restart All Servers" button to perform a full update cycle
+  - Discord Bot Updated the !update ProfileName command to stop, fully update, and restart servers directly from Discord
+  - Fixed an application crash when copying the token to the clipboard in the WEB UI API
+  - Fixed the server status ellipse when updating server via Discord
+
+## Version 2.8.1.0 PRE-RELEASE NOTE
+- Fixed an application crash when copying the token to the clipboard in the WEB UI API
+- Fixed the server status ellipse when updating server via Discord
+- Renamed the button in the Web UI API to correctly reflect the code from *Update Restart* Server to **Stop Update Server**
+
+## Version 2.8.0.0 PRE-RELEASE NOTE
+- **Bug Fixes**
+ - Fixed duplicated minute value in RCON warning message before scheduled server restart
+ - Clarified functionality by renaming the button to "Restart All Servers" and adding a new "Stop Update Restart All Servers" button to perform a full update cycle
+ - Discord Bot Updated the !update ProfileName command to stop, fully update, and restart servers directly from Discord
+
+## Version 2.7.9.0 PRE-RELEASE NOTE
+- **New Features:**
+  - Automated Config Backup is Here!**
+  - **Custom backup intervals** e.g., every 60 minutes
+  - **Backup retention control** keep only the latest X backups
+  - Full **manual control** with Backup Now and Restore Backup options
+  - **Log tracking** for all backup operations
+  - Direct access to backup folder via **Open Folder**
+  - All configuration backups are stored as .zip archives and can be restored with a single click making server maintenance easier and safer than ever.
+  - This update brings peace of mind to all server admins. Say goodbye to lost settings and misconfigurations!
+- **Bug Fixes**
+  - Improved player name parsing to support commas and flexible spacing in connection list and create backups for players profile.
+  - Fixed an issue where RestartDelayMinutes was not properly saved or loaded due to restrictive validation and incorrect log display.
+
+## Version 2.7.8.0 PRE-RELEASE NOTE
+- **Improvements:**
+  - Added more delays between reboots in the Update Reboot Automation Settings window. Max 5 minutes
+
+## Version 2.7.7.0 PRE-RELEASE NOTE
+- **Improvements:**
+  - Changed the restart methods to allow 120 seconds instead of 60 seconds to detect if the server is running.
+- **Bug Fixes**
+  - Fixed a bug in the SteamCMD Cache Update window confirmation
+  - Fixed the Steam CMD Kill methods (now immediate when clicking the cancel button or closing the window)
+  - Fixed a potential crash in the SteamCMD Cache Update
+  - Fixed a bug in the SteamCMD Cache Update window that caused the cancel button to be completely disabled on a second cancel attempt
+  - Added an informational message indicating that closing the window will cancel the update
+
 ## Version 2.7.6.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Added automatic update checking via CDN or SteamCMD with configurable check intervals and restart warnings.
