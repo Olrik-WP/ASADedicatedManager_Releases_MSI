@@ -1,3 +1,10 @@
+## Version 2.8.3.0 PRE-RELEASE NOTE
+- **New Features:**
+  - Added the Stripe subscription management portal for Annual Subscribers only
+- **Improvements:**
+  - Renamed the incident portal link to the Billing Support Portal
+  - Added the support portal link to the login page for forgotten accounts or other login issues
+
 ## Version 2.8.2.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Automated Config Backup is Here!**
