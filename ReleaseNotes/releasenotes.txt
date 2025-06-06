@@ -1,3 +1,23 @@
+## Version 2.8.4.0 FINAL-RELEASE NOTE
+- **New Features:**
+  - **Added the Stripe subscription management portal for Annual Subscribers only. New button in the subscription management window that allows you to manage your subscription outside the application**
+- **Improvements:**
+  - Renamed the incident portal link to the Billing Support Portal
+  - Added the support portal link to the login page for forgotten accounts or other login issues
+  - **Added automatic removal of the `;METADATA=(Diff=true, UseCommands=true)` line from `GameUserSettings.ini` on server start**
+- **Bug Fixes**
+  - **Major FIX now the ini files are always placed in readonly for all server starts (start all button restart all etc... via the API via the discord bot...) previously only the start server button placed the files in readonly**
+  - Fixed issue where "Duplicate Keys Found" error made INI files read-only, preventing save; files are now set writable before opening in Notepad.
+
+## Version 2.8.3.0 PRE-RELEASE NOTE
+- **New Features:**
+  - Added the Stripe subscription management portal for Annual Subscribers only
+- **Improvements:**
+  - Renamed the incident portal link to the Billing Support Portal
+  - Added the support portal link to the login page for forgotten accounts or other login issues
+- **Bug Fixes**
+  - Major FIX now the ini files are always placed in readonly for all server starts (start all button restart all etc... via the API via the discord bot...) previously only the start server button placed the files in readonly
+
 ## Version 2.8.2.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Automated Config Backup is Here!**
