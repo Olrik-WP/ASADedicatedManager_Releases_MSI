@@ -1,3 +1,31 @@
+## Version 2.8.5.0 FINAL-RELEASE NOTE
+- **New Features:**
+  - Mod update dates Provides instant visual identification of mods that may require attention
+  - New button (Premium) to automatically fetch actual mods update dates from CurseForge
+    - Mod update dates are color-coded based on how recent they are:
+    - Green: Updated within the last week
+    - Orange: Updated between 1 week and 1 month ago
+    - Yellow: Updated between 1 and 3 months ago
+    - Red: Updated more than 3 months ago
+  - Optimized performance with batch endpoints fetching
+  - Automatic fallback handling if needed
+  - Enhanced error management
+- **Bug Fixes**
+  - **Fixed: Configuration backup ini settings were not being retained**
+    - Settings for backup interval, number of backups to keep, and destination folder are now properly saved in the profile
+    - These settings are automatically reloaded on application restart
+  - Fixed: Backup folder kept reverting to the default location**
+    - The user-defined custom backup folder is now correctly remembered
+    - The application no longer forces a reset to the default folder on every startup
+  - Fixed: Auto-start timer was not functioning**
+    - The "Auto start timer on application startup" checkbox now works correctly
+    - If checked, the automatic backup timer now starts when the application launches
+  - Affected Settings
+    - Backup interval (in minutes)
+    - Number of backups to keep
+    - Backup destination folder
+    - Auto-start timer on application launch
+
 ## Version 2.8.4.0 FINAL-RELEASE NOTE
 - **New Features:**
   - **Added the Stripe subscription management portal for Annual Subscribers only. New button in the subscription management window that allows you to manage your subscription outside the application**
