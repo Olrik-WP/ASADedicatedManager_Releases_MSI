@@ -1,3 +1,21 @@
+## Version 2.8.6.0 FINAL-RELEASE NOTE
+- **Bug Fixes**
+  - **Application freeze resolved**  
+    - **Problem**: The application would completely freeze if the server crashed immediately at startup. The interface remained unresponsive indefinitely while waiting for a log file that was never created.  
+      - **Solution**: The blocking wait system was replaced with an asynchronous method that monitors the server process.  
+        - The application now instantly detects if the server crashes and displays an error message instead of freezing.  
+        - The interface remains responsive even in the event of a server startup failure.
+        - Fallback processes still run to ensure the server is not running
+- **Improvements:**
+  - The MSI installation mode has been changed from passive to interactive.  
+  - Users now see the full installation wizard, allowing them to review and confirm each step of the setup.  
+  - Automatic detection of the previously installed version  
+  - Automatic closure of the application if it is still running  
+  - **Full removal of all old files**
+  - **Clean installation of the new version**
+  - **No remnants of previous versions are left behind**
+  - Updates are now guaranteed to be complete!
+
 ## Version 2.8.5.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Mod update dates Provides instant visual identification of mods that may require attention
