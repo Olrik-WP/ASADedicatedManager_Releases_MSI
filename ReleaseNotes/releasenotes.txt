@@ -1,3 +1,9 @@
+## Version 2.8.8.0 FINAL-RELEASE NOTE
+- **Improvements:**
+  - The manager was losing track of servers with a lot of mods because the log file timeout (10s) was too short. Servers were taking up to 20-30s to create their logs.
+  - Increased the timeout from 10s to 60s to cover slow servers and machines with a lot of mods. The manager now correctly monitors all server types.
+  - Note this increases the time it takes to detect a crashed server at startup
+
 ## Version 2.8.7.0 FINAL-RELEASE NOTE
 - **Emergency Fix:**
   - Improved update system: Updates now only remove application files (exe, dll, system folders) while automatically preserving your custom files, configurations, and manually added data in the installation folder.
