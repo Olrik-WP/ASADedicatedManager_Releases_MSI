@@ -1,3 +1,7 @@
+## Version 2.8.7.0 FINAL-RELEASE NOTE
+- **Emergency Fix:**
+  - Improved update system: Updates now only remove application files (exe, dll, system folders) while automatically preserving your custom files, configurations, and manually added data in the installation folder.
+
 ## Version 2.8.6.0 FINAL-RELEASE NOTE
 - **Bug Fixes**
   - **Application freeze resolved**  
