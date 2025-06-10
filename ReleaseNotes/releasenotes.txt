@@ -1,3 +1,96 @@
+## Version 2.8.9.0 PRE-RELEASE NOTE
+- **New Features:**
+  - **Configuration Cache System**
+    - Added intelligent caching for Game.ini and GameUserSettings.ini
+      - Automatically saves configuration changes when server is running
+      - Prevents direct file modification during server operation
+      - Applies cached changes on next server restart
+  - **User Interface Enhancements**
+    - Added "Manage Cache" button in GameUserSettings.ini tab
+      - Shows "Pending cache" warning when changes are cached
+      - Visual indicators with orange color and bold text
+    - Added "Manage Cache" button in Game.ini tab
+      - Same functionality and visual indicators as GameUserSettings tab
+      - Unified cache management across both configuration files
+  - **Cache Management Window**
+    - Comprehensive cache overview
+      - Summary of all pending changes
+      - File-specific change counts
+      - Last modification timestamps
+    - Apply Now functionality
+      - Immediate application when server is stopped
+      - Automatic file permission management
+    - Clear Cache option
+      - Remove all pending changes with confirmation
+      - Reset to original file state
+    - Auto-apply on restart setting
+      - Configurable automatic cache application
+      - Applied during server startup process
+  - **Cache Details Window**
+    - Detailed change inspection
+      - View all cached changes in tabular format
+      - Sort by file, section, key, value, or timestamp
+      - Complete change history with timestamps
+    - Individual entry deletion
+      - Remove specific cached changes with red "Delete" buttons
+      - Confirmation dialog with change details
+      - Granular control over what gets applied
+- **Improvements:**
+  - **Smart Change Detection**
+    - Only modified values are cached
+      - Compares current values against original file contents
+      - Prevents entire configuration from being cached
+      - Intelligent baseline value management
+  - **File Protection System**
+    - Automatic read-only management
+      - Files become read-only when server starts
+      - Automatic unlock when server stops
+      - Prevents external modification conflicts
+  - **Persistent Storage**
+    - Cache survives application restarts
+      - JSON-based storage in server/Cache directory
+      - Profile-specific cache files
+      - Automatic loading on startup
+  - **Visual Feedback**
+    - Real-time indicator updates
+      - Button text changes reflect cache state
+      - Color coding for pending changes
+      - Updates after all cache operations
+- **Note:**
+  - **User Workflow**
+    - When Server is Running
+      1. Make configuration changes in Game.ini or GameUserSettings.ini tabs
+      2. Click "Save" - changes are automatically cached
+      3. "Manage Cache" buttons show "Pending cache" warning
+      4. Continue making changes - all modifications are tracked
+    - Managing Cache
+      1. Click "Manage Cache" button in any configuration tab
+      2. Review pending changes summary
+      3. Choose to "Apply Now" (if server stopped) or "Clear Cache"
+      4. Use "View Details" for granular change management
+      5. Delete individual entries if needed
+    - Server Restart Process
+      1. Cached changes are automatically applied during server startup
+      2. Files are temporarily unlocked for modification
+      3. Cache is cleared after successful application
+      4. Visual indicators return to normal state
+- **File Structure:**
+  - Cache files stored in: `{ServerPath}/Cache/`
+  - Format: `{ProfileName}_GameUserSettings_cache.json`
+  - Format: `{ProfileName}_Game_cache.json`
+  - Automatic directory creation and cleanup
+- **Benefits:**
+  - No more configuration loss when server is running
+  - Batch application of multiple changes
+  - Granular control over what changes to apply
+  - Visual feedback on pending modifications
+  - Persistent cache across application sessions
+  - Intelligent change detection reduces unnecessary caching
+- **MSI Installation Improvements**
+  - Replaced random component identifiers with fixed ones
+    - **Technical Cause**: Random component IDs were replaced by fixed IDs
+    - **Update Impact**: Future updates will be more reliable and complete
+
 ## Version 2.8.8.0 FINAL-RELEASE NOTE
 - **Improvements:**
   - The manager was losing track of servers with a lot of mods because the log file timeout (10s) was too short. Servers were taking up to 20-30s to create their logs.
