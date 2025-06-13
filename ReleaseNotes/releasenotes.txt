@@ -1,3 +1,16 @@
+## Version 2.9.0.0 PRE-RELEASE NOTE
+- **Bug Fixes**
+  - Updated case handling in INI files (Game.ini not loaded in the manager for some users)
+  - INI file sections and keys are now case-insensitive
+  - Interface search is now case-insensitive
+  - PvP/PvE filtering is now case-insensitive
+    - Example
+      - Before: `[/Script/ShooterGame.ShooterGameMode]` didn't work if written in uppercase
+      - After: `[/script/shootergame.shootergamemode]` works perfectly
+  - When the server crashed after an automatic restart, the application did not detect it. Changed the restart method to use the full boot method to check if the server has restarted.
+  - Fixed `CheckProcess: Attempt 13/12` messages (limit exceeded).
+  - More accurate status messages in the logs.
+
 ## Version 2.8.9.0 PRE-RELEASE NOTE
 - **New Features:**
   - **Configuration Cache System**
