@@ -1,17 +1,4 @@
-## Version 2.9.0.0 PRE-RELEASE NOTE
-- **Bug Fixes**
-  - Updated case handling in INI files (Game.ini not loaded in the manager for some users)
-  - INI file sections and keys are now case-insensitive
-  - Interface search is now case-insensitive
-  - PvP/PvE filtering is now case-insensitive
-    - Example
-      - Before: `[/Script/ShooterGame.ShooterGameMode]` didn't work if written in uppercase
-      - After: `[/script/shootergame.shootergamemode]` works perfectly
-  - When the server crashed after an automatic restart, the application did not detect it. Changed the restart method to use the full boot method to check if the server has restarted.
-  - Fixed `CheckProcess: Attempt 13/12` messages (limit exceeded).
-  - More accurate status messages in the logs.
-
-## Version 2.8.9.0 PRE-RELEASE NOTE
+## Version 2.9.1.0 FINAL-RELEASE NOTE
 - **New Features:**
   - **Configuration Cache System**
     - Added intelligent caching for Game.ini and GameUserSettings.ini
@@ -100,9 +87,24 @@
   - Persistent cache across application sessions
   - Intelligent change detection reduces unnecessary caching
 - **MSI Installation Improvements**
+  - The MSI installation now launch the Manager even in Update mode
   - Replaced random component identifiers with fixed ones
     - **Technical Cause**: Random component IDs were replaced by fixed IDs
     - **Update Impact**: Future updates will be more reliable and complete
+- **Improvements:**
+  - The scheduled task that launches the manager at Windows startup is now executed with Administrator privileges. Warning: This change will require user intervention at each automatic startup (UAC prompt). If you want to avoid this, disable UAC.
+  - Note: It is necessary to disable and re-enable the Start with Windows checkbox.
+- **Bug Fixes**
+  - Updated case handling in INI files (Game.ini not loaded in the manager for some users)
+  - INI file sections and keys are now case-insensitive
+  - Interface search is now case-insensitive
+  - PvP/PvE filtering is now case-insensitive
+    - Example
+      - Before: `[/Script/ShooterGame.ShooterGameMode]` didn't work if written in uppercase
+      - After: `[/script/shootergame.shootergamemode]` works perfectly
+  - When the server crashed after an automatic restart, the application did not detect it. Changed the restart method to use the full boot method to check if the server has restarted.
+  - Fixed `CheckProcess: Attempt 13/12` messages (limit exceeded).
+  - More accurate status messages in the logs.
 
 ## Version 2.8.8.0 FINAL-RELEASE NOTE
 - **Improvements:**
