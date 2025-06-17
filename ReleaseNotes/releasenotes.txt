@@ -1,3 +1,72 @@
+## Version 2.9.3.0 PRE-RELEASE NOTE
+- **Updated:**
+  - Migrated from `ini-parser` 2.5.2 (unmaintained since 8 years) to `ini-parser-netstandard` 2.5.3 for enhanced security, active maintenance, and .NET Standard 2.0 support (fully compatible with .NET Framework 4.8).
+  - Updated `CoreRCON` to latest stable version for better protocol handling, bug fixes, and improved performance.
+  - Updated `Discord.Net` to latest compatible version for .NET Framework 4.8, improving gateway stability, error handling, and rate limit management.
+  - Ensured .NET Framework 4.8 is properly targeted and referenced to leverage latest runtime fixes and long-term stability.
+  - Modernized NuGet package references to the latest versions supported under .NET Framework 4.8.
+- **New Features:**
+  - Server Startup Monitoring & Auto-Recovery: Added intelligent server startup monitoring with 5-minute timeout protection against zombie/stuck server processes.
+    - Real-time startup progress tracking with minute-by-minute status updates
+    - Automatic detection of failed server startups that don't complete within expected timeframe
+    - Automatic server process termination when startup fails or hangs
+    - One-time automatic restart attempt after startup failure
+    - Clear, detailed logging of all startup monitoring activities
+  - Enhanced Server Process Management: Improved server lifecycle management with proper cleanup of all monitoring timers.
+    - Fixed issue where process monitoring continued running after server termination
+    - Better resource cleanup preventing memory leaks from orphaned timers
+    - Comprehensive timer management during server shutdown and restart operations
+  - **Key Deletion Buttons**: Added delete buttons (✖) next to each configuration key in both GameUserSettings.ini and Game.ini tabs with confirmation dialogs
+    - Direct file modification when server is stopped, or cache-based deletion marking when server is running with automatic application on restart
+    - Extended cache manager with `MarkKeyForDeletion()` method and visual indicators showing "[MARKED FOR DELETION]" in cache summary and details windows
+  - Privacy First – Public Stats Dashboard (Coming Soon): Introducing a brand-new public statistics dashboard directly inside the manager.
+    - Displays fully encrypted and anonymized technical data:
+      - Operating systems used
+      - .NET Framework versions
+      - Number of CPU cores
+      - Number of connected users
+      - Countries where the manager is used
+    - Shows usage stats such as:
+      - Most used ASA Dedicated Manager versions
+      - Beta versions currently in use
+    - Privacy protections:
+      - All data is encrypted and irreversible
+      - No personal or identifiable information is ever collected
+      - No IP addresses
+      - No tracking
+      - 100% technical data only — transparently visible inside the manager
+- **Improved:**
+  - INI file parsing now supports:
+    - UTF-8 encoding by default
+    - Proper handling of comments and inline notes
+    - Case-insensitive section/key matching
+    - Escape sequences processing
+    - Merge operations for INI blocks and configuration inclusion
+    - File includes using `#include` and `#base` directives
+    - Duplicate key resolution with value concatenation
+    - Improved Unicode character parsing
+  - Server Startup Reliability: Significantly improved server startup success rate by preventing zombie processes.
+    - Eliminates scenarios where servers appear to start but never become fully operational
+    - Reduces manual intervention required for stuck server processes
+    - Provides clear feedback about server startup progress and potential issues
+    - Prevents indefinite waiting periods when servers fail to start properly
+- **Fixed:**
+  - Zombie Server Prevention: Resolved critical issue where servers could become stuck in an unresponsive state during startup, appearing to run but never completing initialization.
+  - Resource Leak Prevention: Fixed memory and resource leaks caused by monitoring timers not being properly cleaned up during server termination.
+  - Log Message Duplication: Eliminated duplicate startup monitoring messages that could clutter server logs.
+  - Custom configuration files for the Permissions plugin (config.json) were sometimes lost during API updates or uninstallations.
+    - The system now automatically protects these files by avoiding overwriting them during installations and by backing them up before complete uninstallations.
+    - Custom server permissions configurations are now preserved during all API maintenance operations.
+- **Compatibility:**
+  - No code changes required for migrating from `ini-parser 2.5.2` to `ini-parser-netstandard 2.5.3`.
+  - CoreRCON and Discord.NET usage remain identical; APIs unchanged.
+  - All new startup monitoring features work automatically without requiring configuration changes.
+- **Notes:**
+  - This version remains backward-compatible with all existing configuration files.
+  - Minor visual differences may appear in saved `.ini` file formatting due to improved serialization.
+  - Server startup monitoring activates automatically and provides detailed logging to help diagnose startup issues.
+  - The auto-recovery system will attempt one automatic restart if initial startup fails, reducing downtime and manual intervention needs.
+
 ## Version 2.9.2.0 FINAL-RELEASE NOTE
 - **Bug Fixes**
   - Emergency Fix: Fixed Game.ini loading error when duplicate keys like ConfigOverridexxx ... are present by reactivating AllowDuplicateKeys configuration in the ini parser.
