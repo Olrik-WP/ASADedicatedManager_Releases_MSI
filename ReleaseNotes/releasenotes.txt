@@ -1,3 +1,17 @@
+## Version 2.9.4.0 PRE-RELEASE NOTE
+- **New Features:**
+  - Added the !kill profile_name command to the Discord bot
+  - Added the kill server button to the WebUI API
+  - Added the ability to refuse data tracking; in this case, it is not possible to view the Analytics dashboard data; demo data is displayed instead.
+  - When a server crashes immediately during startup, the checkprocess method will attempt to restart the server once after these 12 checks have been completed.
+  - When a server crashes after the checkprocess method, the log reading method will attempt to restart the server after 5 minutes if the server has completed startup and is now advertising for join. If the message does not appear or appears after 5 minutes, the server is considered to have crashed.
+  - The manager logs are now saved to a file with a log rollup.
+  - Each server has its own log. A button allows you to open the folder.
+- **Bug Fixes**
+  - Attempted to fix the manager freeze during scheduled reboots in the event of a server crash. 
+  - Removed the "Log file not found" message box and added a message in the logs instead.
+
+  - Migrated from
 ## Version 2.9.3.0 PRE-RELEASE NOTE
 - **Updated:**
   - Migrated from `ini-parser` 2.5.2 (unmaintained since 8 years) to `ini-parser-netstandard` 2.5.3 for enhanced security, active maintenance, and .NET Standard 2.0 support (fully compatible with .NET Framework 4.8).
