@@ -1,3 +1,12 @@
+## Version 2.9.5.0 PRE-RELEASE NOTE
+- **New Features**
+  - Complete redesign of the Find Mod tab
+    - Added a dedicated Browser for better visibility
+    - Added important mod information
+    - Added a new mod information window
+  - Complete graphical overhaul of the Mod Management tab
+  - Added the Ragnarok map
+
 ## Version 2.9.4.0 PRE-RELEASE NOTE
 - **New Features:**
   - Added the !kill profile_name command to the Discord bot
@@ -11,7 +20,6 @@
   - Attempted to fix the manager freeze during scheduled reboots in the event of a server crash. 
   - Removed the "Log file not found" message box and added a message in the logs instead.
 
-  - Migrated from
 ## Version 2.9.3.0 PRE-RELEASE NOTE
 - **Updated:**
   - Migrated from `ini-parser` 2.5.2 (unmaintained since 8 years) to `ini-parser-netstandard` 2.5.3 for enhanced security, active maintenance, and .NET Standard 2.0 support (fully compatible with .NET Framework 4.8).
