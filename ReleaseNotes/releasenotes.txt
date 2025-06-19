@@ -1,3 +1,7 @@
+## Version 2.9.9.0 PRE-RELEASE NOTE
+- **Bug Fixes**
+  - Fixed occasional freeze caused by disposing the log FileSystemWatcher while its change event was still running.
+
 ## Version 2.9.8.0 PRE-RELEASE NOTE
 - **Improvements:**
 - Complete and modernized redesign of the Game.ini tab
