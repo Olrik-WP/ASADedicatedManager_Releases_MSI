@@ -1,3 +1,7 @@
+## Version 2.9.7.0 PRE-RELEASE NOTE
+- **Improvements:**
+- Complete and modernized redesign of the Game.ini tab
+
 ## Version 2.9.6.0 PRE-RELEASE NOTE
 - **New Features**
   - Added the Mod search history in Find Mods tab
