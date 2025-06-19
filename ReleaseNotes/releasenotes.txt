@@ -1,3 +1,17 @@
+## Version 2.9.6.0 PRE-RELEASE NOTE
+- **New Features**
+  - Added the Mod search history in Find Mods tab
+- **Improvements:**
+  - Completed the redesign of the Find Mods tab
+  - Improved UI display Mod Management Tab
+  - Add mod manually: Pasting a list of mods automatically wraps the line to the next mod
+- **Bug Fixes**
+  - Fixed Copy Mod List not working. Complete overhaul of the method using the Windows API rather than COM and .net In case of error a fallback is in place and offers to save the mods in a file
+  - Add mod manually: Fixed textbox size and added scroll viewer
+  - Fixed mod datagrid size and added a scrollviewer
+  - Fixed the color of all new button styles not being applied
+  - Removed package that allowed building up and down arrows in some tabs. Building code to replace this solution.
+
 ## Version 2.9.5.0 PRE-RELEASE NOTE
 - **New Features**
   - Complete redesign of the Find Mod tab
