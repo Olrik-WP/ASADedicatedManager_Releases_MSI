@@ -1,6 +1,7 @@
 ## Version 2.9.7.0 PRE-RELEASE NOTE
 - **Improvements:**
 - Complete and modernized redesign of the Game.ini tab
+- Complete and modernized redesign of the Command Line tab
 
 ## Version 2.9.6.0 PRE-RELEASE NOTE
 - **New Features**
