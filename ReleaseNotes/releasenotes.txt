@@ -1,3 +1,7 @@
+## Version 3.0.6.0 PRE-RELEASE NOTE
+- **Bug Fixes**
+  -Fix beta not detected
+
 ## Version 3.0.5.0 PRE-RELEASE NOTE
 - **Improvements:**
 - Complete and modernized redesign of the Server Management Core
