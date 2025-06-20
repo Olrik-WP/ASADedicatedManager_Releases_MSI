@@ -1,5 +1,5 @@
-## Version 3.0.1.0 FINAL-RELEASE NOTE
-  - Added Ragnarok_WP map from new Astraeos DLC
+## Version 3.0.2.0 FINAL-RELEASE NOTE
+  - Added Ragnarok_WP map from new Ragnarok DLC
 
 ## Version 2.9.2.0 FINAL-RELEASE NOTE
 - **Bug Fixes**
