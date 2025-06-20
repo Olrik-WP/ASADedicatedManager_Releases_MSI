@@ -1,3 +1,8 @@
+## Version 3.0.7.0 PRE-RELEASE NOTE
+- **Bug Fixes**
+  - Fix update button system visibility
+  - Added detection of new versions when starting the application
+
 ## Version 3.0.6.0 PRE-RELEASE NOTE
 - **Bug Fixes**
   -Fix beta not detected
