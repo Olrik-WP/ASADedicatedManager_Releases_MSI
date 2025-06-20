@@ -1,3 +1,13 @@
+## Version 3.0.5.0 PRE-RELEASE NOTE
+- **Improvements:**
+- Complete and modernized redesign of the Server Management Core
+- **Bug Fixes**
+  - **Fixed application crash on startup when Task Scheduler service is unavailable or access is denied**
+  - Improved error handling for automatic startup configuration with graceful fallback
+  - Enhanced user experience with informative messages and option to restart as administrator when needed
+  - Fixed the color of disabled buttons
+  - Fixed some mod buttons not being disabled when a server is running
+
 ## Version 3.0.4.0 PRE-RELEASE NOTE
 - **Improvements:**
   - Improved Beta Version Detection
