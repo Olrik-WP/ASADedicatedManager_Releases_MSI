@@ -1,3 +1,13 @@
+## Version 3.0.0.0 PRE-RELEASE NOTE
+- **Bug Fixes**
+  - Fixed the Game.ini and GameUsersSettings.ini scrollview expanders
+  - Fixed: Server startup monitoring timer no longer starts multiple instances causing duplicate messages and logs when log file changes are detected during server startup.
+- **Improvements:**
+  - **Changed the zombie server detection timeout from 5 to 10 minutes.** If the "Server has completed startup and is now advertising for join" line doesn't appear after 10 minutes, the server is considered a zombie and a restart is attempted once.
+  - Added the ability to configure the zombie server timeout from 5 to 30 minutes
+  - Changed the number of missing command line checks from 12 to 6 Exemple in log: CheckProcess: Attempt 1/6
+  - Added more detailed messages in the log when a server is started or restarted
+
 ## Version 2.9.9.0 PRE-RELEASE NOTE
 - **Bug Fixes**
   - Fixed occasional freeze caused by disposing the log FileSystemWatcher while its change event was still running.
