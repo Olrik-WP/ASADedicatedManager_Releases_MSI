@@ -1,3 +1,6 @@
+## Version 3.0.2.0 FINAL-RELEASE NOTE
+  - Added Ragnarok_WP map from new Ragnarok DLC
+
 ## Version 2.9.2.0 FINAL-RELEASE NOTE
 - **Bug Fixes**
   - Emergency Fix: Fixed Game.ini loading error when duplicate keys like ConfigOverridexxx ... are present by reactivating AllowDuplicateKeys configuration in the ini parser.
