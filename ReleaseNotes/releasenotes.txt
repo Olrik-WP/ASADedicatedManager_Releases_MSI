@@ -1,3 +1,11 @@
+## Version 3.0.8.0 PRE-RELEASE NOTE
+- **Improvements:**
+  - Complete and modernized redesign of the MainWindow
+- **Bug Fixes**
+  - Fix Privacy windows object reference not set to an instance of an object
+  - Translation of the message box Stop Update Restart All Servers 
+  - WEB UI API Fixed Copy token not working Complete overhaul of the method using the Windows API rather than COM and .net
+
 ## Version 3.0.7.0 PRE-RELEASE NOTE
 - **Bug Fixes**
   - Fix update button system visibility
