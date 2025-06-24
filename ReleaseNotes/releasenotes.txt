@@ -1,3 +1,19 @@
+## Version 3.0.9.0 PRE-RELEASE NOTE
+- **New Features**
+  - Reintroduced the ability to manually update mods from the mods datagird via right-click. Extracting the correct format is automatic (allows you to force mod updates in case of problems with the Curse Forge API and updates via the dedicated server; this solution should only be used in case of problems).
+  - New mod download management window
+  - Mod download URLs were incorrect. Added a button to fix them.
+  - Added a progress bar when retrieving mod dates and fixing mods URLs.
+- **Improvements:**
+  - Reorganized the Command Line tab
+  - Moved the Logout buttons to the main window
+  - Various optimizations to the Find Mods tab
+  - Various optimizations to the Mod Management tab
+  - Added a right-click menu in the mods datagird to copy data download mods ...
+  - Added mod Authors just clic on Fix mod Url to get it
+- **Bug Fixes**
+  - Fixed a crash when translating the Game.ini tab for the TR
+
 ## Version 3.0.8.0 PRE-RELEASE NOTE
 - **Improvements:**
   - Complete and modernized redesign of the MainWindow
