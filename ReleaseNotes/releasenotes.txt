@@ -1,3 +1,9 @@
+## Version 3.2.1.0 PRE-RELEASE NOTE
+- **Bug Fixes:**
+  - Try fix server startup detection failure causing endless restart loops
+    - Replaced unreliable WeakEventManager with direct event subscription for log file monitoring
+    - Added comprehensive information logs to help diagnose startup detection issues
+
 ## Version 3.2.0.0 PRE-RELEASE NOTE
 - **Improvements:**
   - Enhanced network reliability for OVH hosting providers with robust HttpClient configuration
