@@ -1,3 +1,10 @@
+## Version 3.2.0.0 PRE-RELEASE NOTE
+- **Improvements:**
+  - Enhanced network reliability for OVH hosting providers with robust HttpClient configuration
+  - Added automatic retry logic with progressive backoff for login and token refresh operations to handle temporary network issues
+  - Improved connection handling by disabling keep-alive and proxy settings that could cause conflicts with OVH infrastructure
+  - Added explicit timeout configuration and detailed error logging for better diagnostics of connection issues
+
 ## Version 3.1.0.0 PRE-RELEASE NOTE
 - **Bug Fixes**
   - Fixed System message expander opening too often even if messages had already been viewed
