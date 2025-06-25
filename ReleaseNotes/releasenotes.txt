@@ -1,3 +1,10 @@
+## Version 3.1.0.0 PRE-RELEASE NOTE
+- **Bug Fixes**
+  - Fixed System message expander opening too often even if messages had already been viewed
+  - Fixed update process failing with "path too long" error when copying files with paths exceeding 260 characters
+  - Added Windows Long Path support for both CDN and SteamCMD update methods to handle deeply nested file structures
+  - Improved file copy operations to use Long Path API preventing path length limitations during server updates
+
 ## Version 3.0.9.0 PRE-RELEASE NOTE
 - **New Features**
   - Reintroduced the ability to manually update mods from the mods datagird via right-click. Extracting the correct format is automatic (allows you to force mod updates in case of problems with the Curse Forge API and updates via the dedicated server; this solution should only be used in case of problems).
