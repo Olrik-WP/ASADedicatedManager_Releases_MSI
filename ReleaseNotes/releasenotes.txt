@@ -1,3 +1,39 @@
+## Version 3.2.2.0 PRE-RELEASE NOTE
+- **Improvements:**
+  - Added a two-second timeout after deleting the dedicated server log on startup to avoid log interaction issues
+  - **Enhanced connection stability for OVH hosting providers and high-traffic scenarios**
+    - Added intelligent request timing (jitter) to prevent simultaneous API calls from multiple users
+    - Token refresh requests now spread over 5-minute windows instead of exact minute intervals
+    - Login requests include small jitter (0-2 seconds) to prevent connection bursts
+    - Improved error logging with detailed technical information and inner exception tracking
+    - Enhanced HttpClient configuration with connection-close headers for OVH compatibility
+  - Better Analytics dashboard with more detailed information about the manager version
+- **Bug Fixes:**
+  - **Enhanced server startup detection reliability to prevent false timeout errors**
+    - Improved log file monitoring with better character encoding support and case-insensitive text matching
+    - Implemented fallback detection using flexible regex patterns to catch variations in server startup messages
+    - Fixed issues where the "Server has completed startup and is now advertising for join" message was present but not detected, causing unnecessary 10-minute timeouts and automatic restarts
+    - Fixed banner display during scheduled restart
+  - **Fixed critical application crash during server update validation process**
+    - Resolved application crash that occurred when "Server file validation completed" message was displayed
+    - Fixed race conditions in UI thread dispatching that caused improper async/await operations
+    - Converted synchronous `Dispatcher.Invoke()` calls to asynchronous `Dispatcher.InvokeAsync()` in `Checkmanifest()` method to prevent deadlocks
+    - Added proper error handling for manifest checking operations to prevent unhandled exceptions
+    - Eliminated problematic double dispatching pattern (`Task.Run` + `Dispatcher.InvokeAsync`) that caused thread safety issues
+    - Added global exception handlers to capture and log critical errors without terminating the application
+    - Fixed issue where update progress percentage was not displayed correctly during server updates
+  - **Fixed "Verify Update" button disappearing after server installation**
+    - The "Verify Update" button now remains available after server installation completes
+    - Fixed control state evaluation after installation/update operations
+    - Resolved persistent "Error read the logs" status during fresh server installations
+    - Update status now automatically checks for updates after installation instead of showing error message
+  - **CRITICAL: Fixed configuration cache system storing all keys with empty values**
+    - Resolved major cache corruption bug where modifying any single configuration parameter while server was running would save hundreds of empty configuration keys to cache instead of only the modified key
+    - Fixed UI control parsing issue in GameUserSettings.ini tab after ScrollViewer redesign where TextBox controls were no longer properly detected during save operations
+    - Added proper support for ScrollViewer-wrapped TextBox controls in both cache save and normal save operations
+    - Cache now correctly stores only the modified configuration keys with their actual values instead of empty strings
+    - Prevents cache corruption and ensures proper configuration management when server is running
+
 ## Version 3.2.1.0 PRE-RELEASE NOTE
 - **Bug Fixes:**
   - Try fix server startup detection failure causing endless restart loops
