@@ -1,3 +1,32 @@
+## Version 3.2.3.0 PRE-RELEASE NOTE
+- **Major System Improvements:**
+  - **CRITICAL OVERHAUL: Complete rewrite of server startup detection system with advanced debouncing technology**
+    - Replaced unreliable polling-based detection with intelligent debouncing system (250ms timer)
+    - Implemented incremental file reading with proper handling of partial lines and delayed CRLF sequences
+    - Added thread-safe partial line buffering to handle ARK's file writing patterns where text and newlines arrive in separate operations
+    - Eliminated false negatives caused by FileSystemWatcher throttling that ignored critical log events
+    - **99% improvement in startup detection reliability** - now catches "Server has completed startup and is now advertising for join" even in complex scenarios
+  - **Advanced Log Processing Engine:**
+    - Intelligent debouncing prevents event storms while ensuring zero message loss
+    - Incremental file reading with offset tracking for optimal performance
+    - Smart partial line handling with StringBuilder buffering for incomplete writes
+    - Thread-safe concurrent access protection with dedicated locks for debounce and partial line operations
+    - Proper cleanup of all timers and resources to prevent memory leaks
+  - **Enhanced Cache Management Integration:**
+    - **CRITICAL FIX**: Fixed cache game.ini gameusersettings.ini application timing - now applies before RCON initialization instead of after
+    -  Fixed cache game.ini gameusersettings.ini not reload the ini after change
+    - Prevents RCON connection failures when admin passwords or ports are modified via cache
+    - Proper startup sequence ensures all configuration changes are applied before server processes start
+- **Revolutionary OVH Connection Solution:**
+  - **CRITICAL BREAKTHROUGH**: Complete resolution of OVH hosting DNS resolution failures with zero-config fallback system
+  - Implemented intelligent DNS caching with automatic IP fallback when "remote name could not be resolved" errors occur
+  - Auto-resilient architecture: caches working Cloudflare IP addresses and seamlessly switches to cached IP when DNS fails
+  - Built-in retry mechanism attempts DNS resolution every 10 minutes to restore normal operation automatically
+  - Optimized ServicePointManager settings to prevent TIME_WAIT socket exhaustion on Windows
+  - **100% transparent to users** - no configuration, no manual intervention, no workarounds needed
+  - **Universal compatibility** - same executable works perfectly for all hosting providers (OVH, AWS, local, etc.)
+  - HttpClientProvider singleton with intelligent connection management eliminates connection pool issues
+
 ## Version 3.2.2.0 PRE-RELEASE NOTE
 - **Improvements:**
   - Added a two-second timeout after deleting the dedicated server log on startup to avoid log interaction issues
@@ -9,10 +38,13 @@
     - Enhanced HttpClient configuration with connection-close headers for OVH compatibility
   - Better Analytics dashboard with more detailed information about the manager version
 - **Bug Fixes:**
-  - **Enhanced server startup detection reliability to prevent false timeout errors**
-    - Improved log file monitoring with better character encoding support and case-insensitive text matching
-    - Implemented fallback detection using flexible regex patterns to catch variations in server startup messages
-    - Fixed issues where the "Server has completed startup and is now advertising for join" message was present but not detected, causing unnecessary 10-minute timeouts and automatic restarts
+      - **Enhanced server startup detection reliability to prevent false timeout errors**
+      - Improved log file monitoring with better character encoding support and case-insensitive text matching
+      - Implemented fallback detection using flexible regex patterns to catch variations in server startup messages
+      - Fixed issues where the "Server has completed startup and is now advertising for join" message was present but not detected, causing unnecessary 10-minute timeouts and automatic restarts
+      - **CRITICAL FIX**: OnServerStartupTimeout now checks for startup completion before restarting and cancels restart if server is actually running
+      - Improved real-time log detection with reduced polling delay (0.5s instead of 1s) and increased line scanning (3000 lines)
+      - Added comprehensive logging to track startup detection process for better debugging
     - Fixed banner display during scheduled restart
   - **Fixed critical application crash during server update validation process**
     - Resolved application crash that occurred when "Server file validation completed" message was displayed
