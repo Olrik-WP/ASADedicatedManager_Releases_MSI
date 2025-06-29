@@ -1,3 +1,32 @@
+## Version 3.2.5.0 PRE-RELEASE NOTE
+- **Critical Authentication & Network Stability Fixes:**
+  - **CRITICAL FIX**: Fixed ObjectDisposedException during DNS fallback operations in HttpClientProvider
+    - Resolved "System.ObjectDisposedException: Cannot access a disposed object. Object name: 'System.Net.Http.StringContent'" errors
+    - HttpContent is now properly reconstructed for fallback requests instead of being reused after consumption
+    - Implemented intelligent content preservation system that saves StringContent data before first attempt and recreates it for fallback operations
+    - **100% elimination of ObjectDisposedException errors during network retry operations**
+  - **Enhanced Thread-Safety for Authentication System:**
+    - **CRITICAL FIX**: Fixed potential ArgumentOutOfRangeException in Random number generation across TokenManager and LoginWindow
+    - Implemented thread-safe SafeNext() method with lock-based protection for all random number generation
+    - Prevents race conditions when multiple authentication operations occur simultaneously (auto-login + manual login)
+    - **Zero-risk thread-safe implementation for all jitter and timing operations**
+  - **Robust Token Management Improvements:**
+    - **CRITICAL FIX**: Fixed negative wait time calculation in token refresh cycle when TokenDuration < 5 minutes
+    - Implemented Math.Max(1, TokenDuration-5) to ensure minimum 1-minute wait time regardless of backend TokenDuration values
+    - **CRITICAL FIX**: Eliminated header concurrency issues in session status checks
+    - Replaced global DefaultRequestHeaders modification with local HttpRequestMessage approach to prevent header pollution between concurrent requests
+    - Guaranteed cleanup of Authorization headers in all authentication workflows
+  - **Enhanced Connection Reliability:**
+    - **CRITICAL FIX**: Fixed Authorization header cleanup in InvalidateExistingSessionAsync during logout operations
+    - Added comprehensive try/finally blocks to ensure headers are always reset even during DNS failures or timeouts
+    - Prevents Bearer token pollution in subsequent API calls (changelog, CDN requests, etc.)
+    - **100% guaranteed header cleanup regardless of network conditions**
+  - **Advanced Error Recovery & Logging:**
+    - Enhanced error logging with complete stack traces and inner exception details for better OVH hosting diagnostics
+    - Improved jitter timing logs with precise minute calculations for API load distribution monitoring
+    - Added comprehensive authentication flow logging for better troubleshooting of login and token refresh operations
+    - **Production-ready error handling with full exception context preservation**
+
 ## Version 3.2.4.0 PRE-RELEASE NOTE
 - **Improvements:**
   - Fixed search highlight color in game.ini and gameusersettings.ini tab
