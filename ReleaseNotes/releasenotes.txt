@@ -1,3 +1,49 @@
+## Version 3.2.4.0 PRE-RELEASE NOTE
+- **Improvements:**
+  - Fixed search highlight color in game.ini and gameusersettings.ini tab
+**Critical Auto-Update Status Refresh Fix:**
+  - **CRITICAL FIX**: Fixed UpdateStatusLabel not refreshing after automatic server updates
+  - **Server status labels now properly show "Server is up-to-date" after successful auto-updates instead of remaining stuck on "ServerUpdateRequired"**
+  - Added automatic status refresh for each server profile after auto-update completion
+  - Ensures UI consistency between manual and automatic update processes
+- **Enhanced Auto-Update Logging:**
+  - **Fixed incorrect "ERROR" log level for "Update required!" message - now correctly shows as informational**
+  - Improved log organization for better troubleshooting and monitoring
+- **Critical Server Startup Auto-Restart Enhancement:**
+  - **CRITICAL FIX**: Fixed automatic restart feature not working when using AsaApiLoader.exe
+  - **CRITICAL FIX**: Fixed automatic restart flag not being reset after partial server startup, allowing restart for subsequent crashes
+  - **Enhanced startup failure detection and automatic recovery for both direct ArkAscendedServer.exe and AsaApiLoader.exe launches**
+  - Added intelligent cleanup of orphaned AsaApiLoader processes when ArkAscendedServer child process fails during startup
+  - **Automatic restart now properly triggers once for startup crashes AND once for post-startup crashes in both API and direct server modes**
+  - **Fixed scenario where early startup failures would prevent recovery from later crashes during the same session**
+  - Conservative implementation preserves existing reliability while extending coverage to API scenarios
+- **Major Authentication Windows Redesign:**
+  - **Login Window**: Complete UI modernization with professional card-based design and improved visual hierarchy
+  - **Register Window**: Modern account creation interface with organized sections and enhanced password strength visualization
+  - **Forgot Password Window**: Streamlined password recovery process with clear step-by-step guidance
+  - **Unified Design Language**: All authentication windows now share consistent modern styling with card-based layouts, proper spacing, and professional color schemes
+  - **Enhanced User Experience**: Replaced all popup MessageBox dialogs with inline color-coded status messages for better user flow
+  - **Improved Visual Feedback**: Status messages with emoji indicators and color-coded backgrounds (blue: info, green: success, orange: warning, red: error)
+  - **Modern Input Styling**: Consistent TextBox and PasswordBox styling with focus highlighting (#4CAF50 green) and proper disabled states
+  - **Professional Button Design**: Custom button templates with hover effects, proper disabled states, and consistent styling across all windows
+  - **Enhanced Accessibility**: Better contrast ratios, keyboard navigation support, and clear visual hierarchy
+  - **Compact layout optimization** - reorganized elements horizontally to reduce vertical space usage
+  - **Streamlined interface** with consolidated account management and support sections
+ - **UI/UX Improvements:**
+   - Save buttons in Game.ini and GameUserSettings tab are now disabled during server startup to avoid cache and readonly issues
+- **CRITICAL FIX**: Removed incorrect premium restriction on `ShutdownServerCheckBox`
+  - `ShutdownServerCheckBox` was incorrectly disabled for non-premium users, preventing basic server scheduling functionality
+  - Server shutdown scheduling is now available to all users as intended (basic functionality, not premium)
+  - Fixed critical bug where basic server management features were incorrectly treated as premium-only
+- **Enhanced Premium Button Visual System:**
+  - **Improved Premium Button Color Logic**: Premium buttons now display distinct visual states
+  - **Added Premium Diamond Icons** All premium buttons now display diamond icons for clear identification
+**Critical Binding System Cleanup & Fixes:**
+- **CRITICAL FIX**: Fixed missing `SearchQuery` property causing binding errors in Find Mods tab
+  - Added missing `SearchQuery` property for mod search functionality
+  - Resolved "BindingExpression path error: 'SearchQuery' property not found" errors that occurred during runtime
+  - Ensures proper two-way data binding for mod search by name, author, or keywords functionality
+
 ## Version 3.2.3.0 PRE-RELEASE NOTE
 - **Major System Improvements:**
   - **CRITICAL OVERHAUL: Complete rewrite of server startup detection system with advanced debouncing technology**
