@@ -1,3 +1,11 @@
+## Version 3.2.7.0 PRE-RELEASE NOTE
+- **Improvements:**
+  - Removed the blur effect from tabs
+  - Improved tab closing design
+  - Changed the color of tabs and selected tabs
+ - **Major Backup tab Redesign:**
+   - **Backup tab **: Complete UI modernization with professional card-based design and improved visual hierarchy
+
 ## Version 3.2.6.0 PRE-RELEASE NOTE
 - **Bug Fixes:**
   - Fixed an issue where multiple MessageBoxes could appear in a loop when an error occurred.
