@@ -1,3 +1,13 @@
+## Version 3.2.6.0 PRE-RELEASE NOTE
+- **Bug Fixes:**
+  - Fixed an issue where multiple MessageBoxes could appear in a loop when an error occurred.
+- **Improvements:**
+  - Added a centralized application log that records all errors and exceptions.
+  - Replaced unwanted MessageBoxes with silent error logging, preventing disruptive popups.
+  - Users can now access the error log directly from the Options menu.
+- **Other**
+  - Thanks to the new global exception handler added in previous beta, the application no longer crashes on unhandled errors, now issues are safely logged instead
+
 ## Version 3.2.5.0 PRE-RELEASE NOTE
 - **Critical Authentication & Network Stability Fixes:**
   - **CRITICAL FIX**: Fixed ObjectDisposedException during DNS fallback operations in HttpClientProvider
