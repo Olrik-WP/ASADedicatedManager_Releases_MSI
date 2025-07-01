@@ -1,3 +1,7 @@
+## Version 3.2.9.0 PRE-RELEASE NOTE
+- **Bug Fixes:**
+  - Removed debug feature
+
 ## Version 3.2.8.0 PRE-RELEASE NOTE
 - **Major DNS Cache & Network Reliability Improvements:**
   - **CRITICAL FIX: DNS Cache Persistence System**
