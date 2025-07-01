@@ -1,3 +1,28 @@
+## Version 3.2.8.0 PRE-RELEASE NOTE
+- **Major DNS Cache & Network Reliability Improvements:**
+  - **CRITICAL FIX: DNS Cache Persistence System**
+    - **Fixed critical issue where resolved IP addresses were not used. In all previous beta DNS fallback not work**
+    - Fixed critical issue where resolved IP addresses were lost on application restart
+    - Smart cache system automatically updates during normal operation
+  - **NEW: Visual DNS Problem Alert System**
+    - Added intelligent red warning banner that automatically appears at the top of the application when DNS issues are detected
+    - Provides helpful recommendations
+    - **Banner automatically disappears when DNS connectivity is restored**
+    - **Zero configuration required** - works automatically with persistent cache system
+  - **Enhanced DNS Fallback Coverage:**
+    - **CRITICAL FIX: Extended DNS fallback system to ALL mod-related operations**
+    - Fixed mod search, mod browser, and mod management failing during DNS connectivity issues
+    - All mod API calls (search, details) now use persistent DNS cache and fallback system
+    - Update Server Verify now uses cached DNS fallback when primary connection fails
+- **User Experience Enhancements:**
+  - **No more mysterious connection failures** - clear visual indication when DNS problems occur
+  - **Uninterrupted workflow** - all features continue working
+  - **Proactive problem notification** - users immediately know when DNS issues are affecting connectivity
+  - **Self-maintaining system** - cache automatically updates and optimizes without user intervention
+  - **Technical knowledge not required** - all complexity handled automatically in the background
+- **Bug Fixes:**
+  - Fixed manager launch delay in launch task with windows
+
 ## Version 3.2.7.0 PRE-RELEASE NOTE
 - **Improvements:**
   - Removed the blur effect from tabs
@@ -742,15 +767,15 @@
 - **Bug Fixes**
   - Fixed UI freeze when starting servers due to issues in the startup process.
   - Resolved potential startup failures when the server launches too quickly.
-  - Addressed error: *“The process cannot access the file because it is in use by another process”* — error messages now appear directly in the log area.
+  - Addressed error: *"The process cannot access the file because it is in use by another process"* — error messages now appear directly in the log area.
   - Fixed bug preventing the CDN window from closing.
   - Eliminated crash caused by modifying `HttpClient` timeout post-request.
   - Enforced `CultureInfo.InvariantCulture` for number formatting to fix issues with `,` and `.` across different languages.
   - Fixed multiple crashes when copying cache files that were in use or read-only.
 - **Note**
-  - This release marks a **major milestone** with the official rollout of the Private Server Updater. After multiple iterations and internal testing, we’re proud to open it to the public. Expect **faster updates**, **smoother experiences**, and **more control** than ever before.
+  - This release marks a **major milestone** with the official rollout of the Private Server Updater. After multiple iterations and internal testing, we're proud to open it to the public. Expect **faster updates**, **smoother experiences**, and **more control** than ever before.
   - The next update will introduce **full automation of server updates via CDN**, including **automatic server shutdown and restart** during the update process.
-  - Please share your feedback—we’re just getting started!
+  - Please share your feedback—we're just getting started!
 
 ## Version 2.6.4.0 PRE-RELEASE NOTE
 - **Improvements**
@@ -3697,7 +3722,7 @@ Reach out to the discord for assistance. We're here to help! 🤝
   * Be careful to use the appropriate RCON IP or some features will not work!
 - Fix the tab selection color issue.
 - Close manager correctely kill the PID rather than the process
-- Close Manager Windows don’t kill all process of the dedicated server but the correct PID
+- Close Manager Windows don't kill all process of the dedicated server but the correct PID
 - Redesign of button activation deactivation logic
 
 ## Version 1.4.4.4 FINAL-RELEASE NOTE
