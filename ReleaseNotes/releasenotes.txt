@@ -1,80 +1,98 @@
+## Version 3.3.1.0 FINAL-RELEASE NOTE
+- **Critical Bug Fixes:**
+  - **CRITICAL FIX: Update Button Visibility Issue**
+    - Fixed critical issue where the Manager update button remained hidden even when new stable versions were available
+    - **For users stuck on older versions**: If you cannot see the update button to upgrade from the Manager, please download the latest version directly from the official website https://asadedicatedmanager.eu/
+    - The update detection system was working correctly (showing red version text), but the update button was not visible due to incorrect XAML hierarchy control
+    - Fixed by properly controlling the parent Border visibility instead of the button itself
+    - **This ensures all users can properly upgrade to future stable releases through the built-in update system**
+- **Technical Details:**
+  - Resolved WPF visibility inheritance issue where parent Border remained collapsed while child Button was set to visible
+  - Modified update check logic to control updateButtonBorder.Visibility instead of updateButton.Visibility
+  - Affects both automatic silent update checks and manual update verification processes
+- **Forgot to mention in the previous change log**
+  - Added the !kill profile_name command to the Discord bot
+  - Added the kill server button to the WebUI API
+
 ## Version 3.3.0.0 FINAL-RELEASE NOTE
 - **New Features:**
+  - Added the !kill profile_name command to the Discord bot
+  - Added the kill server button to the WebUI API
   - **Server Promotion System**
-    - Server promotion has been added to the **Manager** tab — publish your server on the official Manager site to boost its visibility.
-    - Promotions last **30 days**; renew them from the **Promotions** window at the bottom. When a promotion expires, just click **Renew**.
-  - Reintroduced the ability to **manually update mods** via right-click in the Mods datagrid (useful when CurseForge/API updates fail).
+    - Server promotion has been added to the **Manager** tab  publish your server on the official Manager site to boost its visibility.
+    - Promotions last **30 days** renew them from the **Promotions** window at the bottom. When a promotion expires, just click **Renew**.
+  - Reintroduced the ability to **manually update mods** via right-click in the Mods datagrid useful when CurseForgeAPI updates fail.
   - **New Mod Download Manager** window with progress bar and one-click URL fixes.
-  - **Mod URL Repair & Author Retrieval** button (fetches correct links and author data).
+  - **Mod URL Repair and Author Retrieval** button fetches correct links and author data.
   - **Mod Search History** in *Find Mods* tab.
   - **Find Mod Tab Overhaul**
     - Dedicated browser view.
-    - Rich mod-info pane & new mod-details window.
+    - Rich mod-info pane and new mod-details window.
   - **Mod Management** tab complete graphical overhaul.
   - **Rollback to Previous Version** capability.
-  - **Zombie-Server Timeout Configuration** (5--30 min) plus detailed startup/restart log messages.
-  - **Key-Deletion Buttons (x)** beside each INI key (direct file change when stopped, cache mark when running).
-  - **Intelligent Server Startup Monitoring & Auto-Recovery**
+  - **Zombie-Server Timeout Configuration** 5--30 min plus detailed startuprestart log messages.
+  - **Key-Deletion Buttons x** beside each INI key direct file change when stopped, cache mark when running.
+  - **Intelligent Server Startup Monitoring and Auto-Recovery**
     - Real-time progress tracking, automatic termination of failed starts, one-shot restart, detailed logging.
-  - **Privacy-First Public Stats Dashboard** — fully encrypted, anonymised technical metrics only.
+  - **Privacy-First Public Stats Dashboard**  fully encrypted, anonymised technical metrics only.
 - **Improvements:**
-  - **Major DNS Cache & Network Reliability Enhancements**
+  - **Major DNS Cache and Network Reliability Enhancements**
     - Persistent DNS cache now survives restarts and is used for every network operation.
-    - **Visual DNS Alert Banner** (red, auto-hides on recovery).
-    - DNS fallback now covers *all* mod-related API calls & update verification.
+    - **Visual DNS Alert Banner** red, auto-hides on recovery.
+    - DNS fallback now covers *all* mod-related API calls and update verification.
   - Complete UI modernisation:
     - **MainWindow**, **Server Management Core**, **Backup**, **Game.ini**, **Command Line**, **Find Mods**, **Mod Management**, **Authentication** windows.
     - Removed blur effect from tabs, refined close buttons, updated colour scheme.
   - **Backup Tab** rebuilt with card-based design.
-  - Centralised **application log** for all errors/exceptions; accessible from *Options* menu.
-  - Replaced disruptive MessageBoxes with silent logging; global exception handler prevents crashes.
-  - **Premium Button Visual System** — diamond icons & improved colour logic.
-  - Enhanced DNS/cloud reliability:
-    - Robust `HttpClient` config, connection-close headers, jittered token/login timing, explicit timeouts.
+  - Centralised **application log** for all errorsexceptions accessible from *Options* menu.
+  - Replaced disruptive MessageBoxes with silent logging global exception handler prevents crashes.
+  - **Premium Button Visual System**  diamond icons and improved colour logic.
+  - Enhanced DNScloud reliability:
+    - Robust HttpClient config, connection-close headers, jittered tokenlogin timing, explicit timeouts.
     - **Zero-config DNS fallback** caches Cloudflare IPs and auto-restores normal DNS.
   - **Debounced Server Startup Detection** with incremental file-read buffering and log-processing engine.
   - **Cache Management** now applies INI changes before RCON initialisation and reloads config after edits.
   - **Auto-Update**: UI status label refresh, correct log levels, richer logs.
-  - **AsaApiLoader** startup/restart handling & orphan-process cleanup.
-  - **Windows Long Path** support for CDN/SteamCMD updates; path-length errors eliminated.
+  - **AsaApiLoader** startuprestart handling and orphan-process cleanup.
+  - **Windows Long Path** support for CDNSteamCMD updates path-length errors eliminated.
   - Detection of new Manager versions on start-up and improved beta-build detection.
-  - Modernised NuGet packages; ensured .NET 4.8 targeting and long-term stability.
+  - Modernised NuGet packages ensured .NET 4.8 targeting and long-term stability.
   - Two-second delay after deleting dedicated log to avoid file-access issues.
-  - INI parsing enhancements (UTF-8, comments, `#include`, duplicate key merge, escape sequences).
+  - INI parsing enhancements UTF-8, comments, include, duplicate key merge, escape sequences.
   - Analytics dashboard shows detailed Manager-version stats.
-  - Save buttons in INI tabs are disabled during server startup (avoids cache/readonly conflicts).
+  - Save buttons in INI tabs are disabled during server startup avoids cachereadonly conflicts.
 - **Bug Fixes:**
-  - **CRITICAL**: `ObjectDisposedException` on DNS fallback resolved (content properly reconstructed).
-  - Thread-safe random generation (`SafeNext()`), negative token-wait fix, header leakage cleanup.
-  - Manager launch delay fixed (Windows Task Scheduler).
+  - **CRITICAL**: ObjectDisposedException on DNS fallback resolved content properly reconstructed.
+  - Thread-safe random generation SafeNext, negative token-wait fix, header leakage cleanup.
+  - Manager launch delay fixed Windows Task Scheduler.
   - Infinite MessageBox loop removed.
   - **Auto-Restart** now works with AsaApiLoader and resets flags correctly.
-  - Missing `SearchQuery` binding in *Find Mods* tab added.
-  - `ShutdownServerCheckBox` wrongly marked premium — restored to basic tier.
-  - Configuration-backup INI settings (interval, count, folder, auto-start) persist correctly; custom backup folder remembered; auto-start timer fixed.
+  - Missing SearchQuery binding in Find Mods tab added.
+  - ShutdownServerCheckBox wrongly marked premium  restored to basic tier.
+  - Configuration-backup INI settings interval, count, folder, auto-start persist correctly custom backup folder remembered auto-start timer fixed.
   - Banner display during scheduled restart corrected.
-  - Crash during *Verify Update* / manifest validation fixed; progress % now visible.
-  - **CRITICAL**: Cache system no longer saves hundreds of empty keys; ScrollViewer text-box detection restored.
+  - Crash during Verify Update  manifest validation fixed progress % now visible.
+  - **CRITICAL**: Cache system no longer saves hundreds of empty keys ScrollViewer text-box detection restored.
   - Endless restart loop from startup-detection failure eliminated.
   - System-message expander no longer reopens repeatedly.
   - Long-path copy failures during updates fixed.
-  - Turkish localisation crash in *Game.ini* tab fixed.
-  - Privacy window “object reference” error resolved.
+  - Turkish localisation crash in Game.ini tab fixed.
+  - Privacy window object reference error resolved.
   - Update-button visibility and beta detection issues fixed.
   - Disabled-button colour inconsistencies and mod-button state errors fixed.
-  - Freeze from disposing `FileSystemWatcher` while event active fixed.
-  - *Copy Mod List* and datagrid size/scroll issues fixed; improved fallback & UI.
-  - Manager freeze during scheduled reboot after crash eliminated; redundant message box removed.
-- **Critical Fixes & Stability Enhancements:**
-  - **DNS Connection Solution** — automatic IP caching and seamless switchovers.
+  - Freeze from disposing FileSystemWatcher while event active fixed.
+  - *Copy Mod List* and datagrid sizescroll issues fixed improved fallback and UI.
+  - Manager freeze during scheduled reboot after crash eliminated redundant message box removed.
+- **Critical Fixes and Stability Enhancements:**
+  - **DNS Connection Solution**  automatic IP caching and seamless switchovers.
   - Comprehensive error-logging with full stack traces for diagnostics.
   - Robust token-management and authentication flow concurrency fixes.
   - Automatic restart logic handles both startup and post-startup crashes.
   - Resource-leak prevention: timers, orphaned processes, header cleanup.
 - **Other:**
   - Every server now has its own rolling log with quick-open button.
-  - Manager logs rotate automatically; data-tracking opt-out shows demo metrics.
-  - Existing configuration files remain compatible; minor cosmetic differences in INI formatting possible.
+  - Manager logs rotate automatically data-tracking opt-out shows demo metrics.
+  - Existing configuration files remain compatible minor cosmetic differences in INI formatting possible.
   - Production-ready error handling with full context preservation.
 
 ## Version 3.2.9.0 PRE-RELEASE NOTE
