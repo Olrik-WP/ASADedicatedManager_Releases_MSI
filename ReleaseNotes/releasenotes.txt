@@ -1,3 +1,50 @@
+## Version 3.3.2.0 FINAL-RELEASE NOTE
+- **Critical DNS Performance and User Experience Improvements:**
+  - **MAJOR FIX: DNS Timeout Optimization**
+    - Increased default DNS resolution timeout from 3 seconds to 7 seconds to better handle slow IPv6 responses
+    - Resolves TaskCanceledException errors that occurred when IPv6 was enabled and caused DNS delays
+    - DNS resolution now completes successfully in most network environments without requiring manual DNS changes
+  - **CRITICAL FIX: Non-Blocking DNS Resolution**
+    - Completely redesigned DNS resolution system to prevent UI thread blocking during network operations
+    - Replaced blocking Task.Result calls with proper async/await pattern using CancellationToken
+    - Application interface remains responsive during DNS resolution delays
+    - Eliminated 5-10 second UI freezes that occurred during DNS timeout scenarios
+  - **Enhanced TaskCanceledException Handling**
+    - Added comprehensive TaskCanceledException handling in HttpClientProvider.SendWithFallbackAsync
+    - DNS timeout scenarios now properly trigger fallback IP routing instead of throwing unhandled exceptions
+    - Improved error logging with specific timeout detection and fallback attempt notifications
+  - **Professional User Experience During DNS Issues**
+    - Login button automatically disables during authentication attempts to prevent multiple concurrent requests
+    - Intelligent delay detection displays informative message after 3 seconds of DNS resolution delay
+    - Clear user guidance provided: Try using DNS 1.1.1.1 and 8.8.8.8 or disable IPv6 in network settings
+    - Login button automatically re-enables when authentication completes regardless of success or failure
+    - Status message automatically clears upon successful authentication
+  - **Improved DNS Issue Recommendations**
+    - Updated DNS connectivity warnings in both LoginWindow and MainWindow to include IPv6 disable recommendations
+    - Comprehensive solutions provided: Change DNS servers to 1.1.1.1 and 8.8.8.8 OR disable IPv6
+    - User-friendly guidance helps resolve common network connectivity issues without technical expertise required
+- **Technical Improvements:**
+  - **Advanced Async DNS Implementation**
+    - Created separate async internal methods for DNS resolution with proper CancellationTokenSource usage
+    - Maintained backward compatibility with existing public method signatures
+    - Improved error handling with specific logging for DNS cancellation versus other network failures
+  - **Memory Leak Prevention**
+    - Added proper event subscription cleanup in LoginWindow.Closing to prevent DNS status change memory leaks
+    - Implemented using statements for CancellationTokenSource to ensure proper resource disposal
+  - **Enhanced Logging and Diagnostics**
+    - Added detailed timing logs for DNS resolution attempts showing exact millisecond durations
+    - Specific logging for IPv4 versus IPv6 resolution attempts to help diagnose network configuration issues
+    - Improved fallback route logging with clear indication when cached IP addresses are being used
+- **User Experience Enhancements:**
+  - **Smart Message Display System**
+    - Delayed message display prevents unnecessary warnings for fast network connections
+    - Automatic message cancellation if authentication completes quickly
+    - Thread-safe UI updates using Dispatcher.Invoke for cross-thread operations
+  - **Consistent DNS Guidance Across Application**
+    - Unified DNS troubleshooting recommendations between login screen and main application warnings
+    - Clear actionable steps provided to users experiencing DNS connectivity issues
+    - Professional messaging that explains what is happening and provides solutions
+
 ## Version 3.3.1.0 FINAL-RELEASE NOTE
 - **Critical Bug Fixes:**
   - **CRITICAL FIX: Update Button Visibility Issue**
