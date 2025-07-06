@@ -1,3 +1,40 @@
+## Version 3.3.3.0 FINAL-RELEASE NOTE
+- **Critical Multi-Server Process Management Fix:**
+  - **CRITICAL FIX: AsaApiLoader Process Termination Bug**
+    - Fixed critical issue where a failed server startup would kill ALL AsaApiLoader processes system-wide
+    - Previously when one server failed to start properly, the cleanup process would terminate AsaApiLoader processes from other running servers
+    - This caused multiple servers to crash when only one server had startup issues
+    - **Root Cause**: Process cleanup was using Process.GetProcessesByName("AsaApiLoader") which returns all processes with that name
+    - **Solution**: Process cleanup now only targets AsaApiLoader processes created by the specific failing server instance
+    - **Impact**: Prevents cascade failures where one server startup issue affects other operational servers
+  - **Enhanced Process Isolation and Safety:**
+    - Implemented intelligent process tracking that maintains before/after process lists for each server launch
+    - Added process ID validation to ensure only processes created by the current server instance are terminated
+    - Includes fallback protection for initial process detection to handle edge cases
+    - **Multi-server environments are now completely safe from cross-server process interference**
+  - **Improved Error Logging and Diagnostics:**
+    - Added detailed logging showing exactly which processes are being terminated and why
+    - Process cleanup now reports the number of processes cleaned up for transparency
+    - Clear distinction between server-specific cleanup and system-wide operations in log messages
+- **Technical Implementation Details:**
+  - **Smart Process Differentiation**: Uses ProcessComparer to identify new processes created during server launch
+  - **Initial Process Protection**: Includes the initial AsaApiLoader process in cleanup list when appropriate
+  - **Thread-Safe Operations**: All process operations remain thread-safe with proper exception handling
+  - **Backward Compatibility**: No changes to existing functionality or user interface
+- **User Experience Improvements:**
+  - **Reliable Multi-Server Operations**: Users can now run multiple servers simultaneously without risk of cascade failures
+  - **Predictable Cleanup Behavior**: Failed server startups only affect the specific server that failed
+  - **Enhanced Stability**: Eliminates unexpected shutdowns of working servers due to unrelated startup issues
+  - **Professional Error Handling**: Clear diagnostic messages help identify and resolve server-specific issues
+- **Rollback Security Enhancement:**
+  - **ENHANCEMENT: Administrator Privilege Verification for Rollback Operations**
+    - Added mandatory administrator privilege check before initiating any rollback operation
+    - Prevents rollback failures by verifying required permissions upfront instead of failing mid-process
+    - Clear explanatory message informs users why administrator rights are necessary for rollback operations
+    - **Root Cause**: Rollback process requires uninstalling current version and installing previous version which needs administrative rights
+    - **Solution**: Proactive privilege verification with user-friendly guidance to restart application as administrator
+    - **Impact**: Eliminates rollback failures and provides clear path to resolution for users
+
 ## Version 3.3.2.0 FINAL-RELEASE NOTE
 - **Critical DNS Performance and User Experience Improvements:**
   - **MAJOR FIX: DNS Timeout Optimization**
