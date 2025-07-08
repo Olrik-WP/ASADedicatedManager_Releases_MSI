@@ -1,3 +1,7 @@
+## Version 3.3.5.0 FINAL-RELEASE NOTE
+- **Bug Fixes**
+  - Fixe For Map Ragnarok_WP also Add Astraeos_WP.ark in the list of maps when create a new profile
+
 ## Version 3.3.3.0 FINAL-RELEASE NOTE
 - **Critical Multi-Server Process Management Fix:**
   - **CRITICAL FIX: AsaApiLoader Process Termination Bug**
