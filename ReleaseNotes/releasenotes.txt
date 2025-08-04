@@ -1,3 +1,19 @@
+## Version 3.3.7.0 FINAL-RELEASE NOTE
+- **New Features:**
+  - Amazon Trust Services Certificate Management
+  - New dedicated window to install and verify the required certificates for ASA servers
+  - Automatic installation of all Amazon/Starfield certificates + CRLs with one click
+  - Real-time logs displayed during installation with detailed status
+  - "Copy" button to easily share the certificate report
+  - Automatic verification of administrator privileges before installation
+  - Amazon Trust Services certificates are now automatically installed and verified to ensure the proper functioning of your ASA servers.
+- **Improvements:**
+  - Removed Exclude Movies paramaters in all updates windows. Unused with UE 5.5 update
+  - Cleaner and More Efficient CDN Storage Our backend no longer keeps outdated or unused files for Ark updates on the CDN
+  - The application now launches in full screen
+  - Reduced the main window's shrink limit to 800x600 for small screens
+  - Moved the launch manager option when starting Windows
+
 ## Version 3.3.6.0 FINAL-RELEASE NOTE
 - **Bug Fixes**
   - Fixed incorrect retrieval of mod update date
