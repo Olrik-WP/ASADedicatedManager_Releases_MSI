@@ -1,3 +1,11 @@
+## Version 3.3.8.0 FINAL-RELEASE NOTE
+- **Improvements:**
+  - Optimization of the analytics data dashboard
+  - Applying manual cache (CND and SteamCMD) now stops the server before copying files
+  - Fixed Crash in API uninstallation
+  - CheckProcess now waits 3 attempts instead of 6 before restarting a early crashed server
+  - Added ScrollViewer for small screens. Need more 1st pass
+
 ## Version 3.3.7.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Amazon Trust Services Certificate Management
