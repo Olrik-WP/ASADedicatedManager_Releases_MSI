@@ -1,3 +1,18 @@
+## Version 3.3.9.0 FINAL-RELEASE NOTE
+- **Critical Bug Fixes**
+  - Replaced fixed delays (`await Task.Delay(TimeSpan.FromSeconds(70))`) with active checks on the `IsServerRunning` status for the following operations:
+    - Steam CMD Cache
+    - CDN Cache
+    - Manage Updates and Automatic Restart
+  - File copy operations now begin only when all servers are fully stopped.
+  - Server status is checked every 2 seconds.
+  - Added a safety timeout of 600 seconds (10 minutes) to prevent indefinite waiting.
+  - Detailed log messages and real-time user feedback are provided to indicate server status.
+  - The cache files are copied to the servers as soon as all servers are confirmed stopped, or when the timeout expires (with a warning).
+  - Additional 10-second wait after all servers are stopped before proceeding.
+- **Note:**
+  - This update fixes a critical bug where backups and server shutdowns could take more than 70 seconds, and prevents file corruption caused by copying update files prematurely.
+
 ## Version 3.3.8.0 FINAL-RELEASE NOTE
 - **Improvements:**
   - Optimization of the analytics data dashboard
