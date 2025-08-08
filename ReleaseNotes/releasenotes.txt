@@ -1,3 +1,22 @@
+## Version 3.4.0.0 FINAL-RELEASE NOTE
+- **New Features:**
+  - Added "Clean mods folder and validate files before server launch" checkbox option
+  - This option allows users to automatically clean the mods folder and validate server files before each server start
+  - The cleaning process removes all mod subfolders and the library.json file silently without confirmation dialogs
+  - File validation is performed automatically after cleaning to ensure server integrity
+  - Setting is saved and restored with the server profile like other options
+- **Improvements:**
+  - Extended server restart warning delay options in update settings
+  - Added support for 10, 15, 20, 25, and 30 minute warning delays before automatic server restarts
+  - Previously limited to maximum 10 minutes, now supports up to 30 minutes
+  - Fixed automatic reset of warning delay values when selecting longer durations
+  - Improved initialization handling to prevent unwanted setting changes during application startup
+- **Bug Fixes:**
+  - Fixed RestartWarningDelayComboBox not properly saving and restoring delay values
+  - Corrected validation logic that was resetting longer delay values back to 5 minutes
+  - Added proper initialization protection to prevent settings changes during application loading
+  - Fixed both UpdateSettings and UpdateService validation ranges to support extended delay options
+
 ## Version 3.3.9.0 FINAL-RELEASE NOTE
 - **Critical Bug Fixes**
   - Replaced fixed delays (`await Task.Delay(TimeSpan.FromSeconds(70))`) with active checks on the `IsServerRunning` status for the following operations:
