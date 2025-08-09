@@ -1,3 +1,11 @@
+## Version 3.4.1.0 FINAL-RELEASE NOTE
+- **Improvements:**
+  - Improved font size
+  - Removed bold text
+  - Improved some elements for 1024x768 resolutions, added a new scroll viewer
+  - Changed some colors
+  - Some UI improvements
+
 ## Version 3.4.0.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Added "Clean mods folder and validate files before server launch" checkbox option
