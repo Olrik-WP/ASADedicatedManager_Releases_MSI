@@ -1,3 +1,7 @@
+## Version 3.4.2.0 FINAL-RELEASE NOTE
+- **New Features:**
+  - Addition of the Valguero map in the manager Note that it is officially released on Octeber 07, 2025 this addition is preventive and does not allow you to play it now
+
 ## Version 3.4.1.0 FINAL-RELEASE NOTE
 - **Improvements:**
   - Improved font size
