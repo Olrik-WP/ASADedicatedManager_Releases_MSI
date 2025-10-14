@@ -1,3 +1,21 @@
+## Version 3.4.5.0 FINAL-RELEASE NOTE
+- **Improvements:**
+  - Improved handling of configuration files
+    - The manager now accepts certain harmless duplicated entries in configuration files
+    - This avoids unnecessary startup errors caused by third-party tools like Beacon
+    - Keeps the startup process smooth without requiring manual file edits
+- **Bug Fixes:**
+  - Fixed: Startup was blocked by duplicated settings in GameUserSettings.ini
+    - Some users encountered an error about duplicate keys such as `LastJoinedSessionPerCategory`
+    - These duplicates are harmless and are added by tools like Beacon
+    - The manager now accepts these entries and silently keeps the first one
+    - This prevents startup failures caused by client-only configuration keys
+    - Critical duplicates are still detected and reported as expected
+- **Note:**
+  - `LastJoinedSessionPerCategory` is a setting used only by the ARK game client
+  - It does not affect dedicated server behavior and can appear multiple times without causing problems
+  - This update ensures compatibility with Beacon and similar config generation tools
+
 ## Version 3.4.4.0 FINAL-RELEASE NOTE
 - **Improvements:**
   - Server status indicator now updates correctly
