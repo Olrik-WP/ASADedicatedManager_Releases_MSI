@@ -1,3 +1,31 @@
+## Version 3.4.3.0 FINAL-RELEASE NOTE
+- **Improvements:**
+  - Improved server shutdown reliability
+    - Automatic backups are now safely handled during shutdown
+    - Backup timer is stopped immediately when stopping or restarting the server
+    - If a backup is in progress, the system will wait up to 3 minutes for it to finish
+    - Informative messages are shown every 30 seconds during this waiting time
+    - After 3 minutes, the shutdown continues automatically
+  - Enhanced cache management for SteamCMD updates
+    - The system now avoids creating outdated files that could confuse SteamCMD
+    - SteamCMD now creates and manages its own cache data correctly
+    - Ensures smoother and more reliable mod cache updates
+- **Bug Fixes:**
+  - **Fixed: Server could freeze during restart if an automatic backup started at the same time**
+    - This caused scheduled restarts or shutdowns to hang indefinitely
+    - The backup timer is now stopped before any shutdown
+    - The server now waits (maximum 3 minutes) for backups to finish, preventing crashes or file corruption
+  - **Fixed: SteamCMD cache update failed with "Error 0x6"**
+    - This was caused by a wrongly recreated file with old data
+    - The app no longer deletes or recreates this file — SteamCMD now generates it correctly
+    - Cache updates now work without errors
+- **Note:**
+  - Backup protection remains in place where it's needed:
+    - During world saves
+    - When saving player profiles
+    - When wiping the server
+  - These protections help avoid data loss and are working as expected
+
 ## Version 3.4.2.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Addition of the Valguero map in the manager Note that it is officially released on Octeber 07, 2025 this addition is preventive and does not allow you to play it now
