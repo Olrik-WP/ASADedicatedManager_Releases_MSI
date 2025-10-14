@@ -1,3 +1,32 @@
+## Version 3.4.4.0 FINAL-RELEASE NOTE
+- **Improvements:**
+  - Server status indicator now updates correctly
+    - The colored circle (status indicator) now turns green once the server is fully started
+    - Real-time updates are now shown when starting or stopping a server
+    - "Start All Servers" now starts servers one after another, instead of all at once
+    - Discord commands now correctly reflect the actual server state
+    - Server status remains accurate even after restarting the manager
+
+  - Improved system stability during background operations
+    - Better handling of internal system processes
+    - Increased protection against concurrency-related errors
+    - Code now handles multiple tasks at once without crashing
+  - Safer use of internal server signals
+    - The app now avoids critical exceptions caused by repeated internal signals
+    - Tasks that track server activity now safely ignore duplicate signals without crashing
+- **Bug Fixes:**
+  - Fixed: Server status was stuck on "starting"
+    - This caused servers to be marked as "starting" (yellow) even though they were already running
+    - Resulted in issues with scheduled tasks and blocked automatic updates
+    - Now the status turns green correctly when the server is ready
+  - Fixed: Crash caused by task errors during server operations
+    - Solved the error: `An attempt was made to transition a task to a final state when it had already completed.`
+    - This was caused by repeated internal events triggering completion more than once
+    - The fix ensures these cases are now handled safely without any crash
+  - Fixed: Background server restarts could randomly fail
+    - Improved thread safety during server restarts
+    - No more error messages when starting multiple servers automatically
+
 ## Version 3.4.3.0 FINAL-RELEASE NOTE
 - **Improvements:**
   - Improved server shutdown reliability
