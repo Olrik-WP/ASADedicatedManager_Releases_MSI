@@ -1,3 +1,53 @@
+## Version 3.4.7.0 FINAL-RELEASE NOTE
+- **New Features:**
+  - Addition of the Lost Colony map in the manager
+- **Critical Bug Fixes:**
+  - **Fixed: Game.ini and GameUserSettings.ini creating duplicate entries when applying cache**
+    - The configuration cache system was creating duplicate keys when applying cached changes
+    - This forced users to manually clean their ini files constantly
+    - Cache application now removes ALL occurrences of a key before adding the new value
+    - Improved key detection to handle both `Key=Value` and `Key = Value` formats
+    - Duplicate entries are automatically eliminated during cache application
+  - **Fixed: Cache was reintroducing entries manually removed from ini files**
+    - When users manually deleted lines from ini files, the cache system would re-add them
+    - This happened because the system compared UI values with startup values instead of current file contents
+    - Cache now reloads values directly from ini files before saving
+    - Only entries that exist in the file AND have been modified are cached
+    - Manually deleted entries will no longer be reintroduced by the cache
+- **Improvements:**
+  - Enhanced cache management intelligence
+    - Cache system now respects manual file modifications
+    - Smarter detection of actual changes vs. file edits
+    - Better handling of duplicate key scenarios
+- **Note:**
+  - These fixes resolve the need to constantly clean Game.ini files
+  - Existing duplicates will be automatically cleaned on next cache application
+  - The cache system now works harmoniously with manual ini file edits
+
+## Version 3.4.6.0 PRE-RELEASE NOTE
+- **Critical Bug Fixes:**
+  - **Fixed: Game.ini and GameUserSettings.ini creating duplicate entries when applying cache**
+    - The configuration cache system was creating duplicate keys when applying cached changes
+    - This forced users to manually clean their ini files constantly
+    - Cache application now removes ALL occurrences of a key before adding the new value
+    - Improved key detection to handle both `Key=Value` and `Key = Value` formats
+    - Duplicate entries are automatically eliminated during cache application
+  - **Fixed: Cache was reintroducing entries manually removed from ini files**
+    - When users manually deleted lines from ini files, the cache system would re-add them
+    - This happened because the system compared UI values with startup values instead of current file contents
+    - Cache now reloads values directly from ini files before saving
+    - Only entries that exist in the file AND have been modified are cached
+    - Manually deleted entries will no longer be reintroduced by the cache
+- **Improvements:**
+  - Enhanced cache management intelligence
+    - Cache system now respects manual file modifications
+    - Smarter detection of actual changes vs. file edits
+    - Better handling of duplicate key scenarios
+- **Note:**
+  - These fixes resolve the need to constantly clean Game.ini files
+  - Existing duplicates will be automatically cleaned on next cache application
+  - The cache system now works harmoniously with manual ini file edits
+
 ## Version 3.4.5.0 FINAL-RELEASE NOTE
 - **Improvements:**
   - Improved handling of configuration files
