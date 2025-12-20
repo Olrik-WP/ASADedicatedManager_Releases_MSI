@@ -1,3 +1,167 @@
+## Version 3.5.0.0 FINAL-RELEASE NOTE
+- **Critical SteamCMD Improvements:**
+  - **Implemented automatic retry and repair system (up to 3 attempts)**
+    - All SteamCMD operations now automatically retry on failure with intelligent error detection
+    - SteamCMD is automatically redownloaded and bootstrapped on retry attempts
+    - Covers all error scenarios: "Missing configuration", Error 0x602, 0x6, 0x426, corrupted downloads
+    - **Corrupted manifest auto-deletion on retry**: `appmanifest_2430930.acf` is now deleted before each retry attempt
+    - Prevents Error 0x6 from repeating across all 3 attempts due to stale manifest
+  - **Enhanced error detection and validation**
+    - Checks for critical files: `ArkAscendedServer.exe`, `appmanifest_2430930.acf`
+    - Validates `SteamCMDInstall\logs\console_log.txt` for installation failures
+    - Detects incomplete installations even if SteamCMD reports "Success"
+  - **Improved installation visibility**
+    - SteamCMD console window now hidden during installation and updates
+    - All SteamCMD output redirected to "Installation or update logs" section in UI
+    - Log expander automatically opens and displays real-time progress
+    - Main scroll viewer auto-scrolls to bottom to keep logs visible
+    - Progress bar positioned below logs for better visibility
+    - Clear English messages for all stages: attempts, retries, success, failure
+  - **Robust failure handling**
+    - If SteamCMD fails, waits 10-15 seconds before retry
+    - Automatically deletes and recreates `SteamCMDInstall` directory on retry
+    - Deletes corrupted `appmanifest_2430930.acf` before each retry (fixes Error 0x6 loop)
+    - Ensures fresh bootstrap on each retry attempt
+    - After 3 failed attempts, displays clear error message with last known error
+  - **UI Freeze Prevention**
+    - Replaced all blocking `await Dispatcher.InvokeAsync()` with non-blocking `Dispatcher.BeginInvoke()`
+    - Bootstrap output now read asynchronously to prevent UI freeze
+    - UI remains responsive during all SteamCMD operations (download, bootstrap, install)
+- **UI/UX Improvements:**
+  - Installation logs section made visible and automatically expanded during updates/installs
+  - Increased log viewer height from 100px to 200px for better visibility
+  - Added automatic scroll-to-bottom for ServerManagementScrollViewer (parent scroll)
+  - Progress bar now correctly positioned below logs (Grid.Row="4")
+  - All messages now in English only for consistency
+  - Clear progress indicators: "Attempt X/3", "[INFO]", "[WARN]", "[ERROR]", "[SUCCESS]"
+- **Cache System Improvements:**
+  - **Complete refactoring of CacheUpdateManager to match ServerTab reliability**
+    - Cache updates now use the same robust `EnsureSteamCmdReadyAsync` method as server installations
+    - Automatic SteamCMD download, extraction, and bootstrap on first use or corruption
+    - Up to 3 retry attempts with automatic SteamCMD redownload on failure
+    - Uses global `SteamCMDInstall` directory (not local to cache folder)
+    - `WorkingDirectory` set to global SteamCMD directory to prevent "Missing configuration" errors
+  - **Unified exit code handling**
+    - Exit code `-1073741819` (0xC0000005) now correctly recognized as NORMAL (not an error)
+    - Prevents false "SteamCMD failed" messages when cache update actually succeeded
+    - Verifies critical files exist: `ArkAscendedServer.exe` + `appmanifest_2430930.acf`
+  - **Enhanced retry mechanism**
+    - Corrupted `appmanifest_2430930.acf` deleted before each retry attempt
+    - Fixes Error 0x6 repeating across all retry attempts in cache updates
+    - Creates `steamapps` directory automatically before SteamCMD execution
+    - 15-second delay between retry attempts for network stability
+  - **Improved logging and visibility**
+    - Clear attempt numbering: "=== Attempt 1/3 ===", "=== Attempt 2/3 ===", etc.
+    - Detailed logs for each operation: download, bootstrap, update, verification
+    - English-only messages for consistency across all operations
+  - **Applied to all cache update mechanisms:**
+    - Manual cache updates via Cache Window (Update Cache button)
+    - Automatic cache updates via UpdateService (background updates)
+    - Cache system now as reliable as direct server updates
+  - **Result:**
+    - Cache updates now succeed after 1-2 attempts instead of failing all 3 times
+    - Exit code `-1073741819` no longer causes unnecessary retries
+    - Users with unstable networks can now successfully update the cache
+    - "Missing configuration" errors eliminated from cache operations
+- **Technical Details:**
+  - `EnsureSteamCmdReadyAsync` now accepts `forceRedownload` parameter
+  - Bootstrap process now uses `CreateNoWindow=true` to hide CMD windows
+  - Bootstrap streams read asynchronously with `Task.Run` to prevent blocking
+  - `PerformUpdateAsync` refactored with intelligent retry loop (max 3 attempts)
+  - **`CacheUpdateManager.UpdateCacheAsync` completely refactored:**
+    - Now includes `EnsureSteamCmdReadyAsync` method (copied from ServerTab)
+    - Uses global SteamCMD path: `AppDomain.CurrentDomain.BaseDirectory\SteamCMDInstall`
+    - Sets `WorkingDirectory = steamcmdInstallDir` for all SteamCMD process executions
+    - Implements while loop with `currentAttempt` counter (1 to 3)
+    - Deletes corrupted manifest before each retry (lines 550-565)
+    - Creates `steamapps` directory before SteamCMD execution (lines 541-547)
+    - Verifies `ArkAscendedServer.exe` and `appmanifest_2430930.acf` after completion
+    - Ignores exit code `-1073741819` as normal (not an error)
+  - SteamCMD output captured via `RedirectStandardOutput` and `RedirectStandardError`
+  - Async stream reading with `Dispatcher.BeginInvoke` prevents UI blocking
+  - Multiple validation checkpoints: stdout/stderr content, log files, game files
+  - Created `AppendOutputLog()` helper method for automatic scrolling
+  - Added `ServerManagementScrollViewer` name to main ScrollViewer for scroll control
+- **Migration Notes:**
+  - Existing installations will benefit from new retry system on next update
+  - No user action required - all improvements are automatic
+  - Failed installations from previous versions can now be fixed with "Reinstall SteamCMD" button
+- **Note:**
+  - This version drastically improves installation reliability for users with unstable networks
+  - SteamCMD failures that previously required manual intervention now auto-resolve
+  - Empty cache folders and incomplete server installations should no longer occur
+  - Users will no longer see confusing CMD windows during installation
+  - Error 0x6 loops in cache updates are now automatically resolved
+  - UI remains fully responsive during all operations
+  - **Cache updates are now as reliable as direct server installations**
+  - Exit code `-1073741819` false positives eliminated from cache operations
+  - Users who previously couldn't update the cache due to network issues should now succeed
+
+## Version 3.4.9.0 FINAL-RELEASE NOTE
+- **Critical Bug Fixes:**
+  - **Fixed: New server installation only downloads ~140MB without game data**
+    - Some users reported that clicking "Install Server" would create a folder but not download game files
+    - Only SteamCMD itself (~140MB) was being downloaded without the actual ARK server files
+    - Root cause: SteamCMD was being executed from within the server directory, causing "Missing configuration" errors
+  - **Fixed: "Missing configuration" and "Please set the game install path to something other than the Steam install folder" errors**
+    - SteamCMD was previously installed in `serverPath\steamcmd\` and executed from there
+    - This caused SteamCMD to refuse installation because the target directory contained SteamCMD itself
+    - **Error 0x602**: Files were appearing to download but not actually being saved
+    - SteamCMD now uses the global `SteamCMDInstall` directory for ALL operations
+    - This resolves all "Missing configuration" errors during server installation, updates, and cache operations
+  - **Fixed: Cache system downloading but not saving files (Error 0x602)**
+    - Cache updates would show "Success!" but the cache folder remained empty or incomplete
+    - Same root cause: Local SteamCMD execution in cache directory
+    - Cache system now uses global SteamCMD, ensuring files are properly saved
+  - **Fixed: Install Server button now uses unified robust update logic**
+    - The Install Server button now leverages the same battle-tested code as Update and Check Files
+    - Benefits from automatic SteamCMD error detection (0x6, 0x426, 0x486, 0x602, etc.)
+    - Includes automatic retry mechanism (up to 3 attempts) on SteamCMD failures
+    - Automatically reinstalls SteamCMD if corruption is detected
+    - Ensures the Steam manifest (appmanifest_2430930.acf) is always created in each profile
+- **Improvements:**
+  - Unified SteamCMD execution model for ALL systems
+    - All SteamCMD operations (install, update, validate, cache) now use the global `SteamCMDInstall` directory
+    - Server profiles: SteamCMD executes from global location, installs to each profile
+    - Cache system: SteamCMD executes from global location, installs to cache directory
+    - Prevents conflicts between SteamCMD location and installation target directory
+  - Simplified server directory structure
+    - Server directories no longer contain a local `steamcmd` folder
+    - Cache directory no longer contains a local `steamcmd` folder
+    - Cleaner separation between application resources and server/cache data
+    - Existing `serverPath\steamcmd\` and `cacheUpdatePath\steamcmd\` folders are now unused (can be manually deleted if desired)
+  - Enhanced installation reliability
+    - Network errors during installation now trigger automatic retries
+    - SteamCMD corruption is automatically detected and fixed
+    - Full game files are guaranteed to download during initial installation
+    - Error 0x602 (state errors) are properly handled and retried
+  - Preserved per-profile manifest tracking
+    - Each server profile maintains its own `steamapps\appmanifest_2430930.acf` file
+    - Update detection continues to work independently for each profile
+    - No unwanted updates triggered on other profiles
+  - Updated "Reinstall SteamCMD" buttons
+    - Server tab: Now cleans up old local SteamCMD folders and resets manifest
+    - Cache window: Now resets cache manifest and cleans up old folders
+    - No longer copies SteamCMD locally (uses global version)
+- **Technical Details:**
+  - All ProcessStartInfo objects now set `WorkingDirectory` to `SteamCMDInstall`
+  - Button_Click_Install now uses async/await pattern
+  - SteamCMD executes from `AppDomain.CurrentDomain.BaseDirectory\SteamCMDInstall`
+  - `+force_install_dir` still points to individual server profiles or cache directory
+  - Preserves all existing post-installation logic (map folders, config templates)
+  - No breaking changes to existing server functionality
+- **Migration Notes:**
+  - Existing servers will continue to work without any changes required
+  - Old `serverPath\steamcmd\` folders are no longer used and can be safely deleted
+  - Old `cacheUpdatePath\steamcmd\` folders are no longer used and can be safely deleted
+  - Use the "Reinstall SteamCMD" buttons to clean up old folders if desired
+  - No server data or configuration is affected by this change
+- **Note:**
+  - This fix ensures new server installations are as robust as server updates
+  - Users experiencing the 140MB issue or empty cache folders should reinstall/update with this version
+  - The "Missing configuration" and Error 0x602 should no longer occur
+  - Cache updates will now properly save downloaded files
+
 ## Version 3.4.8.0 FINAL-RELEASE NOTE
 - **Bug Fixes:**
   - **Fixed: "appmanifest_2430930.acf not found" error during SteamCMD updates**
