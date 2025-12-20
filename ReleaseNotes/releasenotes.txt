@@ -1,3 +1,26 @@
+## Version 3.4.8.0 FINAL-RELEASE NOTE
+- **Bug Fixes:**
+  - **Fixed: "appmanifest_2430930.acf not found" error during SteamCMD updates**
+    - Some users encountered this error when using the Update or Check Files buttons
+    - The issue occurred because SteamCMD was not present in the server directory
+    - SteamCMD is now automatically installed/updated before each server update
+    - This uses the same reliable logic as the Install Server button
+  - **Fixed: Application crash when Steam manifest file is missing**
+    - The update check no longer throws a fatal exception if the manifest is absent
+    - Instead, it now gracefully indicates that an update is required
+    - The automatic update system will then install SteamCMD and create the manifest
+- **Improvements:**
+  - Enhanced SteamCMD presence verification
+    - The Update and Check Files buttons now ensure SteamCMD is present before running
+    - SteamCMD is automatically copied from the application resources if missing or outdated
+    - Provides a smoother experience for new server installations and migrations
+  - Improved error messages
+    - More informative messages when Steam manifest is not found
+    - Users are no longer blocked by missing manifest files
+- **Note:**
+  - These fixes resolve issues for users who manually set up server directories
+  - The manifest will be automatically created on the next successful SteamCMD update
+
 ## Version 3.4.7.0 FINAL-RELEASE NOTE
 - **New Features:**
   - Addition of the Lost Colony map in the manager
