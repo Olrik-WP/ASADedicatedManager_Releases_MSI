@@ -1,5 +1,6 @@
-## Version 3.7.0.0 CRITICAL UPDATE - FINAL-RELEASE NOTE
+## Version 3.7.2.0 FINAL-RELEASE NOTE
 - **CRITICAL FIX: Automatic Update System Only Checking Cache Instead of Individual Servers**
+  - Fix release note
   - **Problem affecting multi-server automatic updates:**
     - UpdateService automatic update system was only checking cache manifest against Steam API
     - If cache was already up-to-date but individual servers were outdated, no update would trigger
@@ -40,7 +41,7 @@
   - "Auto Apply Updates" feature now works correctly for all server profiles
   - No manual intervention required for each server profile
 
-## Version 3.6.0.0 CRITICAL UPDATE - FINAL-RELEASE NOTE
+## Version 3.6.0.0 FINAL-RELEASE NOTE
 - **CRITICAL FIX: Servers Not Updating to Latest Version**
   - **Problem affecting ALL users:**
     - UI displays "Server update required!" when comparing local buildid to Steam API
