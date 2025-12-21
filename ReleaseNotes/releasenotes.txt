@@ -1,3 +1,32 @@
+## Version 3.6.0.0 FINAL-RELEASE NOTE
+- **CRITICAL FIX: Servers Not Updating to Latest Version**
+  - **Problem affecting ALL users:**
+    - UI displays "Server update required!" when comparing local buildid to Steam API
+    - User clicks "Update Server" or "Check Files" button
+    - SteamCMD executes and reports "installation/update completed successfully"
+    - Server version remains unchanged - still on outdated buildid
+    - Root cause: Existing appmanifest_2430930.acf contains old buildid, causing SteamCMD to believe server is already current
+  - **Solution implemented:**
+    - Application now automatically deletes appmanifest_2430930.acf before executing SteamCMD
+    - Forces SteamCMD to query Steam API for actual latest version instead of trusting cached manifest
+    - Applies to: Server installations, server updates, cache updates
+    - Triggers on: Every retry attempt OR when validate mode is enabled
+  - **Result:**
+    - Servers will now correctly update to actual latest version from Steam
+    - Eliminates false positive "successful updates" that do not download new files
+    - Cache system now downloads correct latest version
+    - "Check Files" button guarantees fresh version verification from Steam API
+- **Technical Implementation:**
+  - ServerTab.xaml.cs: Manifest deleted when attempt greater than 1 OR useValidate equals true
+  - CacheUpdateManager.cs: Manifest deleted when currentAttempt greater than 1 OR validate equals true
+  - Added logging: "Deleted old manifest to force fresh update check"
+  - File path: serverPath/steamapps/appmanifest_2430930.acf
+- **User Impact:**
+  - Users experiencing stuck server versions will now receive proper updates
+  - No manual intervention required - fix is automatic
+  - All existing server profiles benefit from this correction
+  - Cache updates will now properly synchronize to latest version
+
 ## Version 3.5.0.0 FINAL-RELEASE NOTE
 - **Critical SteamCMD Improvements:**
   - **Implemented automatic retry and repair system (up to 3 attempts)**
