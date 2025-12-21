@@ -1,4 +1,46 @@
-## Version 3.6.0.0 FINAL-RELEASE NOTE
+## Version 3.7.0.0 CRITICAL UPDATE - FINAL-RELEASE NOTE
+- **CRITICAL FIX: Automatic Update System Only Checking Cache Instead of Individual Servers**
+  - **Problem affecting multi-server automatic updates:**
+    - UpdateService automatic update system was only checking cache manifest against Steam API
+    - If cache was already up-to-date but individual servers were outdated, no update would trigger
+    - Users reported: "Just keep getting this... Like its only checking the cache and not the servers"
+    - Log showed: "Local Cache Manifest Value: 5889998937579594691, Current Manifest from API: 5889998937579594691, Update needed: False"
+    - System would exit without checking or updating individual server profiles
+  - **Root cause:**
+    - UpdateService.UpdateCheckTimer_Elapsed only called Checkmanifestcacheupdate for cache directory
+    - Did not verify manifest of each server profile in serverPath/steamapps/appmanifest_2430930.acf
+    - Cache could be current version while servers remained on older versions
+  - **Solution implemented:**
+    - UpdateService now checks EVERY server profile manifest individually against Steam API
+    - Added FetchLatestManifestFromAPIAsync method to CacheWindow for manifest retrieval
+    - Compares each server manifest to latest Steam API version before deciding to update
+    - Only exits early if ALL servers are already up-to-date
+    - Cache update is performed only if cache is outdated OR servers need newer files than cache has
+  - **New workflow:**
+    - Step 1: Fetch latest manifest from Steam API once
+    - Step 2: Check each server profile manifest individually
+    - Step 3: If any server needs update, check if cache also needs update
+    - Step 4: Update cache if needed, otherwise use existing cache
+    - Step 5: Apply updates to all outdated server profiles
+  - **Result:**
+    - Automatic updates now correctly detect when individual servers need updating
+    - No longer skips server updates just because cache is current
+    - Multi-server setups will now keep all profiles synchronized to latest version
+    - Logs now show per-server status: "Server 'ProfileName': Local Manifest = X, Latest = Y, Needs Update = Z"
+- **Technical Implementation:**
+  - UpdateService.cs: Added per-server manifest checking loop before cache check
+  - CacheWindow.xaml.cs: Added public FetchLatestManifestFromAPIAsync method
+  - UpdateService now reads appmanifest_2430930.acf from each server profile steamapps directory
+  - Regex pattern extracts manifest value: "manifest"\s+"(\d+)"
+  - Comparison: !string.Equals(serverManifest, latestManifestFromAPI, StringComparison.Ordinal)
+  - Variable anyServerNeedsUpdate determines if update process should continue
+- **User Impact:**
+  - Users with multiple server profiles will now receive proper automatic updates
+  - Fixes issue where only cache was updated but servers remained outdated
+  - "Auto Apply Updates" feature now works correctly for all server profiles
+  - No manual intervention required for each server profile
+
+## Version 3.6.0.0 CRITICAL UPDATE - FINAL-RELEASE NOTE
 - **CRITICAL FIX: Servers Not Updating to Latest Version**
   - **Problem affecting ALL users:**
     - UI displays "Server update required!" when comparing local buildid to Steam API
