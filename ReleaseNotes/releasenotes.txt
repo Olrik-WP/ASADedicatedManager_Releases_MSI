@@ -1,3 +1,13 @@
+## Version 3.7.4.0 FINAL-RELEASE NOTE
+- **FIX: SteamCMD auto-download in Manage Updates window**
+  - The “Manage Updates and Automatic Restarts” (SteamCMD mode) now downloads, extracts, and bootstraps SteamCMD automatically if missing or corrupted before checking the cache.
+  - Adds `EnsureGlobalSteamCmdAsync` to create `SteamCMDInstall`, fetch `steamcmd.zip`, extract it, and run a silent `+login anonymous +quit` bootstrap.
+  - Better logging when SteamCMD cannot be prepared (permissions/connectivity), avoiding “steamcmd.exe not found” errors.
+- **UI/UX: Restart now locks Stop/Save buttons**
+  - During a manual restart, `Stop server` and `Save the game` are disabled alongside `Restart` to prevent conflicting actions while the restart workflow runs.
+- **FIX: Startup button timing**
+  - At server startup, `Stop/Restart/Save` now follow the same unlock timing as `Kill server` to avoid being enabled too early before the server is fully ready.
+
 ## Version 3.7.3.0 FINAL-RELEASE NOTE
 - **CRITICAL FIX: Automatic server restart skipped after auto-update**
   - **Problem:** Servers stopped and updated automatically, but remained offline until the user opened the automatic setup area. Restart step aborted when `IsServerRunning` flag stayed true for a few seconds after stop.
