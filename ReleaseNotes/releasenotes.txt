@@ -1,3 +1,25 @@
+## Version 3.7.3.0 FINAL-RELEASE NOTE
+- **CRITICAL FIX: Automatic server restart skipped after auto-update**
+  - **Problem:** Servers stopped and updated automatically, but remained offline until the user opened the automatic setup area. Restart step aborted when `IsServerRunning` flag stayed true for a few seconds after stop.
+  - **Root cause:** Race condition on the server running flag; `Automatic_LaunchServer` threw "Server is already running" and the restart loop moved on.
+  - **Solution implemented (UpdateService.cs):**
+    - Before restarting each server, re-check `IsServerRunning` up to 3 times with 2s waits.
+    - Add a 2s safety delay before launching.
+    - Restart via Dispatcher with a completion task and a 120s timeout; log explicit errors if restart fails or times out.
+    - If the server still appears running after extra waits, skip restart to avoid duplicate launches and log the issue.
+  - **Result:** Servers now restart reliably after automatic updates without manual intervention; clear logs when a restart is skipped or times out.
+- **NEW: Strict separation of CDN and SteamCMD caches**
+  - **What changed:** CDN operations now use `LocalArkPath` exclusively; SteamCMD operations use a dedicated `CacheUpdatePath` (SteamCMD cache). The active radio button decides which path is used end-to-end.
+  - **Safety:** The UI and service block identical CDN/SteamCMD paths; a warning is shown and the operation stops if both paths match or if SteamCMD path is missing.
+  - **File handling:** SteamCMD checks/downloads and server copies source files from the SteamCMD cache; CDN mode copies from the CDN cache. No cross-copy between caches.
+  - **Folders:** Missing cache folders (and the SteamCMD subfolder) are created automatically when a check/update runs (not just when toggling the radio button).
+- **CRITICAL: SteamCMD manifest alignment to stop update loops**
+  - After a successful SteamCMD cache download, the cache manifest (2430931) is forced to the latest Steam API gid, then copied to every server profile.
+  - Server update detection now reads the manifest of depot **2430931** (main server files), not the first manifest encountered.
+  - Result: if servers are outdated while the cache is up-to-date, they are still updated; and completed updates no longer retrigger because cache/servers share the same manifest gid.
+- **UI: Steam last public update timestamp on Verify**
+  - The Verify button now fetches `depots.branches.public.timeupdated` from the Steam API and shows the local time of the last Steam public release under the update status, or “unknown” if unavailable.
+
 ## Version 3.7.2.0 FINAL-RELEASE NOTE
 - **CRITICAL FIX: Automatic Update System Only Checking Cache Instead of Individual Servers**
   - Fix release note
