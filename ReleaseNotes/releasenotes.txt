@@ -1,3 +1,43 @@
+## Version 3.7.6.0 FINAL-RELEASE NOTE
+- **IMPORTANT CLARIFICATION: UDP Socket Port feature status (3.7.5.0 correction)**
+  - **Transparency notice:**
+    - Version 3.7.5.0 introduced a UDP Socket Port field based on community user report
+    - After further investigation, the `-UDPSocketPort` parameter is **NOT officially documented** by Wildcard/ARK
+    - The actual effect of this parameter on ASA servers remains **unconfirmed**
+    - The `CreateBoundSocket` log message is typically **informational and non-blocking** in Unreal Engine
+  - **What we changed in 3.7.6.0:**
+    - **UI label updated:** "UDP Socket Port (Experimental)" instead of "UDP Socket Port (Steam SDR)"
+    - **Tooltip clarified:** Now explicitly states this is experimental/undocumented with option to leave empty
+    - **Default value changed:** Field is now EMPTY by default (opt-in feature instead of opt-out)
+    - **Conflict detection changed:** Warning message instead of blocking server start
+    - **Feature remains optional:** Can be safely left empty or ignored
+  - **For users upgrading from 3.7.5.0:**
+    - Your configured UDP Socket Port values are preserved
+    - If you had the default "27015" and want to disable: Simply clear the field
+    - The parameter is only passed to command line if the field contains a value
+    - You can safely leave it empty - no parameter will be added, no warnings will appear
+    - Multi-server setups should primarily rely on different GamePort and RCONPort values
+  - **Honest recommendation:**
+    - For most users: **Leave this field EMPTY** (default behavior)
+    - Standard multi-server configuration: Use different GamePort (7777, 7779, 7781...) and RCONPort values
+    - Only fill this field if you want to experiment with an undocumented parameter
+    - If you see `CreateBoundSocket` errors: They are usually non-critical; try different GamePorts first
+  - **Why we kept it:**
+    - Does not interfere with normal operation
+    - Allows advanced users to experiment
+    - If ASA implements this parameter officially in the future, the feature will already be ready
+    - Code is well-written and maintains port management consistency
+  - **Result:**
+    - Transparent communication about feature status
+    - Users can make informed decisions
+    - No forced configuration of experimental parameters
+    - Application remains stable and reliable
+
+- **FIX: UDP Socket Port field remains disabled after server stop**
+  - Fixed issue where UDP Socket Port field stayed disabled/grayed out after stopping or killing the server
+  - The field now properly re-enables alongside GamePort and RCONPort fields
+  - Affects: Stop Server, Kill Server, and automatic server shutdown operations
+
 ## Version 3.7.5.0 FINAL-RELEASE NOTE
 - **CRITICAL FIX: UDP Socket Port conflict detection for multi-server setups**
   - **Problem affecting multi-server users:**
