@@ -1,3 +1,61 @@
+## Version 3.7.5.0 FINAL-RELEASE NOTE
+- **CRITICAL FIX: UDP Socket Port conflict detection for multi-server setups**
+  - **Problem affecting multi-server users:**
+    - When running multiple ARK: Survival Ascended servers on the same machine, servers would spam console with error: `CreateBoundSocket: ::bind couldn't find an open port between 27015 and 27015`
+    - Root cause: ASA introduced a new `-UDPSocketPort` parameter for Steam Datagram Relay (SDR) that replaces the old QueryPort system
+    - ASA Manager was not managing this port, causing all servers to use the default port 27015, resulting in network conflicts
+    - Users experienced server instability, Steam networking issues, and difficulty running multiple instances
+  - **Solution implemented:**
+    - Added new "UDP Socket Port (Steam SDR)" field in the Port Configuration section
+    - Default value: 27015 (matches Steam's default)
+    - Port is automatically passed to server via `-UDPSocketPort=XXXX` command line parameter
+    - Value is saved and restored with server profile
+  - **Port conflict prevention system:**
+    - At application startup: Checks all server profiles and warns if UDP Socket Ports are duplicated
+    - At server launch: Blocks server start if UDP Socket Port conflicts with another running server
+    - Error message provides clear explanation and recommended port configuration (27015, 27016, 27017...)
+    - Uses the same validation system as RCON and Game Port conflict detection
+  - **Recommended configuration for multi-server:**
+    - Server 1: UDP Socket Port = 27015
+    - Server 2: UDP Socket Port = 27016
+    - Server 3: UDP Socket Port = 27017
+  - **Result:**
+    - Multi-server setups now work correctly without `CreateBoundSocket` errors
+    - Each server instance uses a unique UDP Socket Port
+    - Steam Datagram Relay networking functions properly for all servers
+    - Clear warnings prevent accidental port conflicts before starting servers
+
+- **NEW FEATURE: Customizable warning times for Advanced Restart Schedule**
+  - **What's new:**
+    - Added editable text field to customize player warning times before automatic server restarts
+    - Located in "Automatic Shutdown, Update & Restart" section under Advanced Schedule
+    - Default value: "30,15,10,5,4,3,2,1" (warns players at 30, 15, 10, 5, 4, 3, 2, and 1 minute(s) before restart)
+  - **How to use:**
+    - Enter comma-separated warning times in minutes (e.g., "60,30,10,5,1")
+    - Supports flexible formats: commas, semicolons, or spaces as separators
+    - System automatically sorts times in descending order
+    - Invalid entries are ignored; if all values are invalid, uses default times
+  - **Examples:**
+    - For longer warnings: "120,60,30,15,5" (2 hours, 1 hour, 30 min, 15 min, 5 min)
+    - For frequent warnings: "15,10,5,4,3,2,1" (shorter notice period)
+    - For minimal warnings: "10,5,1" (quick restart cycle)
+  - **Automatic saving and loading:**
+    - Settings are saved to server profile automatically when changed
+    - Values persist between application restarts
+    - Each server profile can have different warning time configurations
+  - **Result:**
+    - Server administrators have full control over restart notification timing
+    - Can adapt warning schedules to server population and playstyle
+    - No need to modify code or configuration files manually
+
+- **Technical improvements:**
+  - RconPortManager: Added `GetConflitsPortsUDPSocket()` and `CollecterPortsUDPSocket()` methods
+  - ServerTabServerManagement: Added `GetAdvancedRestartWarnTimes()` parser with error handling
+  - ServerTabSave: Added `AdvancedRestartWarnTimesTextBox_TextChanged()` auto-save handler
+  - ServerTabLoad: Automatic loading of UDP Socket Port and Advanced Restart Warn Times from profile
+  - MainWindow: UDP Socket Port conflict warnings on application startup
+  - All port conflict checks now include UDP Socket Port alongside RCON and Game Port validation
+
 ## Version 3.7.4.0 FINAL-RELEASE NOTE
 - **FIX: SteamCMD auto-download in Manage Updates window**
   - The “Manage Updates and Automatic Restarts” (SteamCMD mode) now downloads, extracts, and bootstraps SteamCMD automatically if missing or corrupted before checking the cache.
