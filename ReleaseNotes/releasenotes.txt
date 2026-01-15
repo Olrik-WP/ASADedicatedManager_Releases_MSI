@@ -1,3 +1,26 @@
+## Version 3.7.8.0 FINAL-RELEASE NOTE
+- **ENHANCEMENT: Staggered restart offset now works for automatic updates**
+  - **User request:**
+    - Users asked if the new "Restart offset between servers" feature would also work when automatic updates are detected
+    - Previously (3.7.7.0), the offset only applied to scheduled server restarts
+  - **What's new in 3.7.8.0:**
+    - The offset setting now applies to BOTH scheduled restarts AND automatic updates
+    - When CDN or SteamCMD cache detects a new update, servers are warned and stopped with the configured offset
+  - **How it works for automatic updates:**
+    - Example with 5-minute offset and 15-minute warning when update detected at 14:00:
+      - 14:00: Server 1 starts 15-minute countdown → stops at 14:15
+      - 14:05: Server 2 starts 15-minute countdown → stops at 14:20
+      - 14:10: Server 3 starts 15-minute countdown → stops at 14:25
+    - Once ALL servers are stopped, updates are applied to all profiles
+    - Then servers restart one by one
+  - **One setting controls everything:**
+    - "Restart offset between servers" in Update Settings applies universally
+    - No additional configuration needed
+  - **Result:**
+    - Consistent behavior across all restart scenarios
+    - Players always see accurate countdown timers regardless of restart reason
+    - Multi-server clusters update smoothly without player confusion
+
 ## Version 3.7.7.0 FINAL-RELEASE NOTE
 - **CRITICAL FIX: RCON unobserved task exception causing manager crash**
   - **Problem reported by users:**
