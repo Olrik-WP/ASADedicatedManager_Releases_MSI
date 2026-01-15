@@ -1,3 +1,70 @@
+## Version 3.7.7.0 FINAL-RELEASE NOTE
+- **CRITICAL FIX: RCON unobserved task exception causing manager crash**
+  - **Problem reported by users:**
+    - ASA Dedicated Manager would crash unexpectedly during server restart/shutdown operations
+    - Error log showed: `Unobserved task exception` from `CoreRCON.RCON.FillPipeAsync`
+    - Exception message: "An existing connection was forcibly closed by the remote host"
+    - The manager crashed, not the game servers - requiring manual restart of the manager
+  - **Root cause identified:**
+    - CoreRCON library runs an internal background task (`FillPipeAsync`) to read data from the server
+    - When the game server restarts or shuts down, this connection is closed by the remote host
+    - The resulting exception was not properly observed, causing the .NET runtime to terminate the application
+    - This is a known behavior with async/await patterns when tasks are not properly awaited or observed
+  - **Solution implemented in RconManager.cs:**
+    - **SafeDisposeRcon():** New method that safely disposes RCON connections, catching all network-related exceptions (SocketException, IOException, ObjectDisposedException, AggregateException)
+    - **Command timeouts:** Added 30-second timeout for all RCON operations to prevent indefinite hangs
+    - **Thread-safe disposal:** Added proper locking mechanism with `volatile` flag to prevent race conditions
+    - **Graceful cancellation:** CancellationToken is now properly propagated to allow clean shutdown of pending operations
+    - **IOException handling:** Connection closed by remote host is now caught and handled gracefully with retry logic
+  - **Solution implemented in App.xaml.cs:**
+    - **SetObserved() called first:** Ensures unobserved task exceptions never terminate the application
+    - **IsExpectedNetworkException():** New method that identifies expected network exceptions (RCON during server restart)
+    - **Smart logging:** Network exceptions from RCON are logged as WARNING instead of ERROR (expected behavior)
+    - **Multi-language detection:** Recognizes exception patterns in both English and French
+  - **Behavior after fix:**
+    - Server restart/shutdown: RCON exceptions are silently caught and logged as warnings
+    - No crash: Manager remains stable throughout all server lifecycle operations
+    - Clean logs: Expected network disconnections don't pollute error logs
+    - Automatic recovery: RCON reconnects automatically when server comes back online
+  - **Result:**
+    - ASA Dedicated Manager no longer crashes during server restart or shutdown operations
+    - Multi-server clusters can run 24/7 with scheduled restarts without manager instability
+    - Users no longer need to manually restart the manager after server operations
+- **NEW FEATURE: Staggered server restart offset for scheduled restarts**
+  - **Problem affecting multi-server scheduled restarts:**
+    - When using "Scheduled Server Restarts" in Update Settings, all servers received restart warnings simultaneously
+    - Example: At 14:00, all 10 servers show "restart in 15 minutes"
+    - However, servers stopped sequentially one after another (with "waiting times between server restarts" delay)
+    - Last server could take 30-40 minutes to actually stop, confusing players who saw "15 minutes" warning
+    - Players would see countdown end, think server restarted, log back in, then server shuts down later
+  - **Solution implemented:**
+    - Added new "Restart offset between servers" option in Update Settings > Scheduled Server Restarts section
+    - Options: 0 min (disabled - current behavior), 1 min, 2 min, 3 min, 5 min, 10 min
+    - Default value: 0 min (preserves existing behavior, no regression)
+  - **How the new offset works:**
+    - When offset = 0: Unchanged behavior - all servers warned simultaneously
+    - When offset > 0: Each server gets its own staggered countdown
+    - Example with 5 min offset and 15 min warning:
+      - 14:00: Server 1 starts 15-minute countdown → stops at 14:15
+      - 14:05: Server 2 starts 15-minute countdown → stops at 14:20
+      - 14:10: Server 3 starts 15-minute countdown → stops at 14:25
+      - Each server stops exactly when its own timer reaches 0
+  - **Technical implementation:**
+    - Each server runs in independent async task with calculated offset delay
+    - RCON warnings sent individually per server with accurate countdown
+    - Banner updates dynamically to show which server is currently processing
+    - All error handling per-server (one server error doesn't block others)
+    - Global restart lock remains active until all servers complete
+  - **Backward compatibility:**
+    - Default setting (0 min) preserves exact current behavior
+    - Existing code path completely unchanged when offset = 0
+    - No impact on users who don't enable this feature
+  - **Result:**
+    - Players see accurate countdown timers matching actual server shutdown time
+    - No confusion from "timer expired but server still running"
+    - Multi-server cluster administrators can space out restarts smoothly
+    - Total operation time increases with offset but each restart is predictable
+
 ## Version 3.7.6.0 FINAL-RELEASE NOTE
 - **IMPORTANT CLARIFICATION: UDP Socket Port feature status (3.7.5.0 correction)**
   - **Transparency notice:**
