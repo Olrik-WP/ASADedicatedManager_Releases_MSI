@@ -1,3 +1,32 @@
+## Version 3.7.9.0 FINAL-RELEASE NOTE
+- **NEW FEATURE: Parallel server shutdown option**
+  - **User request:**
+    - Users wanted all servers to stop AT THE SAME TIME when countdown reaches 0
+    - Previously, servers stopped ONE BY ONE sequentially, causing the last server to take 30-40+ minutes
+    - This caused confusion: players saw "15 minutes" warning but server was still running 40 minutes later
+  - **New option added:**
+    - "Stop all servers simultaneously (parallel shutdown)" checkbox in Update Settings > Scheduled Server Restarts
+    - Location: Below the "Restart offset between servers" option
+    - Default: DISABLED (preserves current sequential behavior)
+  - **How it works when ENABLED:**
+    - All servers receive the same warning countdown (e.g., "15 minutes")
+    - When countdown reaches 0, ALL servers stop at the SAME TIME
+    - Example: 14:00 all get "15 min warning" → 14:15 ALL servers stop simultaneously
+  - **Important warnings:**
+    - **I/O LOAD:** If "Perform Full Backup" is enabled, parallel shutdown will trigger multiple backups simultaneously
+    - This may stress your storage (HDD/SSD) with high I/O load
+    - Recommended for SSD users or when backup is disabled
+    - **"Waiting times between server restarts" is ignored** when parallel shutdown is enabled (since all stop at once)
+  - **When to use:**
+    - Use parallel shutdown when you want accurate countdown timers for players
+    - Use parallel shutdown when you have fast storage (SSD/NVMe)
+    - Avoid if running on slow HDD with "Perform Full Backup" enabled
+  - **Note:** This option only applies when "Restart offset" is set to 0 minutes
+  - **Result:**
+    - Players see "15 minutes" and server actually stops in exactly 15 minutes
+    - No more confusion from staggered shutdowns
+    - All servers restart cleanly after simultaneous shutdown
+
 ## Version 3.7.8.0 FINAL-RELEASE NOTE
 - **ENHANCEMENT: Staggered restart offset now works for automatic updates**
   - **User request:**
