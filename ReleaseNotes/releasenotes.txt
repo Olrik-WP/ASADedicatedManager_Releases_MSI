@@ -1,3 +1,32 @@
+## Version 3.8.0.0 FINAL-RELEASE NOTE
+- **CRITICAL FIX: Cross-thread exception in parallel and staggered restart**
+  - **Problem reported by users:**
+    - When using "Parallel server shutdown" option, all servers stayed online and did not restart
+    - After about 10 minutes, users had to restart servers manually
+    - Log showed German error: "Der aufrufende Thread kann nicht auf dieses Objekt zugreifen, da sich das Objekt im Besitz eines anderen Threads befindet"
+    - English: "The calling thread cannot access this object because a different thread owns it"
+  - **Root cause identified:**
+    - This is a WPF cross-thread access exception, NOT an RCON or network issue
+    - The parallel restart code used `Task.Run()` which executes on background threads
+    - But server tabs are WPF UI controls that can ONLY be accessed from the UI thread
+    - Accessing UI objects from background threads causes the exception and aborts the restart workflow
+  - **What was affected:**
+    - Parallel shutdown (when "Stop all servers simultaneously" is enabled with offset = 0)
+    - Staggered restart with offset (when "Restart offset between servers" > 0 minutes)
+    - Automatic Updates (UpdateService.cs) was NOT affected - it already used Dispatcher correctly
+  - **Fix applied:**
+    - All UI control access is now wrapped in `Dispatcher.InvokeAsync()` to execute on the UI thread
+    - Server profile names are captured in local variables before background tasks to avoid cross-thread access
+    - Parallel shutdown now uses `Dispatcher.InvokeAsync()` instead of `Task.Run()` for UI operations
+    - Staggered restart wraps RCON calls and stop/restart methods in `Dispatcher.InvokeAsync()`
+  - **New log messages:**
+    - Added explicit error message when cross-thread issue is detected: "CRITICAL: Restart aborted due to UI thread access from background task"
+    - This helps users distinguish between cross-thread bugs and RCON/network issues
+  - **Result:**
+    - Parallel shutdown now works correctly - all servers stop simultaneously when countdown reaches 0
+    - Staggered restart with offset works correctly - each server stops at its scheduled time
+    - No more manual intervention required after restart operations
+
 ## Version 3.7.9.0 FINAL-RELEASE NOTE
 - **NEW FEATURE: Parallel server shutdown option**
   - **User request:**
