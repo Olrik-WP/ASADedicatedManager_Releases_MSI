@@ -1,3 +1,17 @@
+## Version 3.8.2.0 FINAL-RELEASE NOTE
+- **FIX: Log watcher timeout increased to 8 minutes**
+  - **Issue identified:**
+    - Some heavily modded servers take longer than 5 minutes to create log file
+    - Example: "Full Startup: 336.24 seconds" (5 minutes 36 seconds) reported by user
+    - The 5-minute timeout from version 3.8.1.0 was insufficient for these cases
+  - **Fix applied:**
+    - Log watcher timeout increased from 5 minutes (300 seconds) to 8 minutes (480 seconds)
+    - This provides a safe margin (~2.5 minutes) for heavily modded or slow-starting servers
+    - The watcher still checks every 500ms and detects crashes immediately
+  - **Result:**
+    - Servers with startup time up to ~7.5 minutes will no longer trigger false timeout warnings
+    - Better support for heavily modded server configurations
+
 ## Version 3.8.1.0 FINAL-RELEASE NOTE
 - **ENHANCEMENTS: Extended scheduled restart options and log watcher timeout**
   - **User request:**
@@ -17,11 +31,11 @@
       - This option is SEPARATE from the individual server "DestroyWildDino After Start" option in Server Management
       - Only applies to scheduled restarts from Update Settings (not automatic updates or individual server restarts)
     - **Extended log watcher timeout:**
-      - Log watcher timeout increased from 60 seconds to 5 minutes (300 seconds)
+      - Log watcher timeout increased from 60 seconds to 8 minutes (480 seconds)
       - Previous timeout was too short for servers with many mods or slow machines
       - The watcher still checks every 500ms for the log file to appear
-      - If server process crashes during startup, detection is still immediate (no need to wait full 5 minutes)
-      - Warning message: "The log file was not created within the time limit" now appears after 5 minutes instead of 1 minute
+      - If server process crashes during startup, detection is still immediate (no need to wait full 8 minutes)
+      - Warning message: "The log file was not created within the time limit" now appears after 8 minutes instead of 1 minute
   - **Technical details:**
     - New setting: `DestroyWildDinoAfterScheduledRestart` (default: False)
     - New flag: `IsScheduledRestart` in ServerTab to distinguish scheduled restarts
