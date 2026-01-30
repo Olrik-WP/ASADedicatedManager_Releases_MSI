@@ -1,3 +1,45 @@
+## Version 3.8.1.0 FINAL-RELEASE NOTE
+- **ENHANCEMENTS: Extended scheduled restart options and log watcher timeout**
+  - **User request:**
+    - Users needed longer restart offset intervals for servers with high RAM usage during startup
+    - Users wanted DestroyWildDinos command (-ForceRespawnDinos) to run during scheduled restarts from Update Settings
+    - Users reported log watcher timeout warnings for servers with many mods or slow startup
+  - **New features added:**
+    - **Extended restart offset intervals:**
+      - Added 15, 20, and 30 minute options to "Restart offset between servers" dropdown
+      - Previous maximum was 10 minutes, now extended to 30 minutes
+      - Useful for servers with RAM optimization that need 30min-1h before reaching optimized state
+      - Example: With 15-minute offset, you can stagger 4 servers over 1 hour (14:00, 14:15, 14:30, 14:45)
+    - **DestroyWildDinos for scheduled restarts:**
+      - New checkbox: "Execute DestroyWildDinos after scheduled restarts" in Update Settings
+      - When enabled, servers will execute -ForceRespawnDinos when restarted via scheduled restarts
+      - Useful for cleaning up wild dinosaurs after a scheduled restart
+      - This option is SEPARATE from the individual server "DestroyWildDino After Start" option in Server Management
+      - Only applies to scheduled restarts from Update Settings (not automatic updates or individual server restarts)
+    - **Extended log watcher timeout:**
+      - Log watcher timeout increased from 60 seconds to 5 minutes (300 seconds)
+      - Previous timeout was too short for servers with many mods or slow machines
+      - The watcher still checks every 500ms for the log file to appear
+      - If server process crashes during startup, detection is still immediate (no need to wait full 5 minutes)
+      - Warning message: "The log file was not created within the time limit" now appears after 5 minutes instead of 1 minute
+  - **Technical details:**
+    - New setting: `DestroyWildDinoAfterScheduledRestart` (default: False)
+    - New flag: `IsScheduledRestart` in ServerTab to distinguish scheduled restarts
+    - The -ForceRespawnDinos argument is added to server launch when both conditions are met:
+      1. Server is being restarted via scheduled restart from Update Settings
+      2. "Execute DestroyWildDinos after scheduled restarts" is enabled
+    - Log watcher change in `ServerTab.xaml.cs` line 4968: timeout parameter changed from 60 to 300 seconds
+  - **User scenario:**
+    - With 15-30 minute offset, users can stagger server restarts to avoid RAM spikes
+    - DestroyWildDinos helps clean up wild dino population after maintenance restarts
+    - Extended log watcher timeout prevents false timeout warnings on slow-starting servers
+    - All features improve server cluster management and stability
+  - **Result:**
+    - Better support for large server clusters with RAM constraints
+    - More flexibility in scheduling maintenance windows
+    - Automatic wild dino cleanup during scheduled maintenance
+    - Reduced false positive warnings for servers with many mods or slow startup
+
 ## Version 3.8.0.0 FINAL-RELEASE NOTE
 - **CRITICAL FIX: Cross-thread exception in parallel and staggered restart**
   - **Problem reported by users:**
