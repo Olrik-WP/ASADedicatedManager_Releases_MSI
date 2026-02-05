@@ -1,3 +1,16 @@
+## Version 3.8.2.1 FINAL-RELEASE NOTE
+- **FIX: Change Email button not working**
+  - **Issue identified:**
+    - The "Change Email" button in User Information panel was unresponsive when clicked
+    - The button was connected to an empty event handler (`ChangeEmailButton_Click_1`)
+    - The actual logic to open the Change Email window existed in a different handler (`ChangeEmailButton_Click`)
+  - **Fix applied:**
+    - Connected the button to the correct event handler `ChangeEmailButton_Click`
+    - Removed the unused empty handler `ChangeEmailButton_Click_1`
+  - **Result:**
+    - The "Change Email" button now correctly opens the Change Email window
+    - Users can change their email address as intended
+
 ## Version 3.8.2.0 FINAL-RELEASE NOTE
 - **FIX: Log watcher timeout increased to 8 minutes**
   - **Issue identified:**
