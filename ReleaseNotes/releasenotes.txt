@@ -1,3 +1,22 @@
+## Version 3.8.2.2 FINAL-RELEASE NOTE
+- **Bug Fixes**
+  - **Fixed: Advanced Messages (am.sendnotification) not displaying in-game for Scheduled Server Restarts**
+    - Restart notifications sent through the Advanced Messages plugin were not appearing in-game when using the Scheduled Restart feature from the Update Settings window
+    - The manager logs indicated that RCON messages were sent successfully, but the plugin received an invalid message format
+    - The issue was caused by the restart message incorrectly **adding the minute count instead of replacing the `{minutes}` placeholder**
+    - This resulted in messages containing the literal `{minutes}` string, which caused the plugin to ignore them
+    - The message processing logic has been corrected so `{minutes}` is now properly replaced with the actual remaining time
+    - Restart notifications now display correctly in-game for all scheduled restart configurations
+    - Update warning messages no longer show duplicated time information
+    - No impact on Stop Server warnings or manual RCON test messages
+  - **Fixed: Port conflict when creating a new server profile**
+    - Custom ports defined in the UI before installing a server were not applied to the generated configuration
+    - The installation process copied the default `GameUserSettings.ini` template containing the default ports (7777 / 27020)
+    - As a result, multiple new server profiles could start using identical ports, causing conflicts
+    - The manager now automatically synchronizes the **ServerPort** and **RCONPort** from the profile into the newly created `GameUserSettings.ini` during installation
+    - Servers created with custom ports will now start with the correct configuration immediately
+    - Existing servers remain unchanged and are not modified by this fix
+
 ## Version 3.8.2.1 FINAL-RELEASE NOTE
 - **FIX: Change Email button not working**
   - **Issue identified:**
