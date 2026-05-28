@@ -1,3 +1,11 @@
+## Version 3.8.2.3 FINAL-RELEASE NOTE
+- **Bug Fixes**
+  - Refactor window closing logic and enhance admin elevation handling
+  - Updated window closing logic to ensure MainWindow instances are closed using CloseForReal() to prevent ghost instances during session expiry.
+  - Improved admin elevation handling in App.xaml.cs to avoid unnecessary relaunch attempts and ensure proper mutex management across different user sessions.
+  - Enhanced log file download process in MainWindowAutoUpdate.cs with increased timeout and improved error handling for better user experience.
+  - Fixed potential memory leaks in MainWindowSystemTray.cs by reusing ContextMenuStrip and ensuring proper disposal of FileSystemWatchers in ServerTab.xaml.cs.
+
 ## Version 3.8.2.2 FINAL-RELEASE NOTE
 - **Bug Fixes**
   - **Fixed: Advanced Messages (am.sendnotification) not displaying in-game for Scheduled Server Restarts**
