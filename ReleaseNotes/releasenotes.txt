@@ -1,3 +1,42 @@
+## Version 3.8.2.5 FINAL-RELEASE NOTE
+- **FIX: RCON could bind to an unusable local IP (Tailscale / link-local), breaking RCON features**
+  - **Problem reported by users:**
+    - After installing a VPN such as Tailscale, RCON features (player list, scheduled restart warnings, save world, etc.) could stop working
+    - The "Local IP used for RCON" dropdown listed every IPv4 address of every network adapter, including auto-configured link-local addresses (169.254.x.x) from a half-connected Tailscale adapter
+    - When no IP was explicitly chosen, the application auto-selected the first non-loopback address, which could be the Tailscale 169.254 address - an IP that can never be used to reach the server
+  - **Root cause identified:**
+    - The local IP list was built from all "Up" interfaces without filtering out non-routable addresses
+    - The default selection only skipped loopback (127.x), not link-local (169.254.x)
+  - **Fix applied:**
+    - The local IP list now excludes loopback (127.x) and link-local / APIPA (169.254.x) addresses
+    - The default IP selection also skips 169.254.x addresses
+    - Normal LAN/public IPs (and intentional VPN addresses like Tailscale 100.x) remain available
+  - **Result:**
+    - RCON no longer auto-binds to an unreachable virtual adapter address
+    - More reliable RCON behavior on machines with VPNs or multiple network adapters
+  - **Note:** This is unrelated to the window-duplication fixes (3.8.2.3 / 3.8.2.4). DNS resolution timeouts caused by a VPN's DNS interception are handled separately by the built-in cached-IP DNS fallback.
+
+## Version 3.8.2.4 FINAL-RELEASE NOTE
+- **CRITICAL FIX: Application windows multiplying and very high memory usage after automatic logout / re-login**
+  - **Problem reported by users:**
+    - After an automatic logout (session re-login prompt), the application progressively opened more and more windows
+    - Task Manager showed a single ASADedicatedManager process, but with dozens of windows and very high RAM usage (several GB), eventually becoming unresponsive
+    - Several users noticed it happening specifically around automatic re-login prompts
+    - The issue was NOT caused by running multiple instances - the single-instance protection was working correctly
+  - **Root cause identified:**
+    - Each time the main window was (re)created after a login, it subscribed to the internal logout event but never unsubscribed from it
+    - Over successive automatic logout / re-login cycles, these subscriptions accumulated
+    - A single logout event then triggered every past subscription at once, each one opening a new login window and a new main window - duplicating windows exponentially
+    - The old (now hidden) windows were never released, keeping all their resources alive in memory (timers, file watchers, etc.), which explained the very high RAM usage and the application freezing
+    - This could be triggered by ANY automatic logout, including a genuine session/token expiration, which is why the problem was not specific to a particular network or DNS setup and pre-dated recent network changes
+  - **Fix applied:**
+    - The logout event subscription is now tracked and properly removed when a window is closed or when a logout occurs
+    - Only a single active logout handler is kept at any time
+    - Combined with the window-closing fix from 3.8.2.3, old windows are now fully destroyed and their memory is reclaimed
+  - **Result:**
+    - Automatic logout / re-login now opens exactly one login window and one main window
+    - No more window multiplication, no more runaway memory usage, and the application stays responsive over long sessions
+
 ## Version 3.8.2.3 FINAL-RELEASE NOTE
 - **Bug Fixes**
   - Refactor window closing logic and enhance admin elevation handling
